@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Thông tin cá nhân";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+
+}
+
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+   <div class="row">
+       <div class="col-md-12 col-sm-12 col-xs-12">
+           <div class="x_panel">
+               <div class="x_title">
+                   <h2>Thông tin của bạn</h2>
+                   <div class="clearfix"></div>
+               </div>
+               <!-- end x_title-->
+               <div class="x_content">
+                   <form ng-submit="sendUpdate()">
+                       <div class="row">
+                           <div class="col-lg-6 col-md-6 col-sm-12">
+                               <div class="form-group">
+                                   <label>Tên công ty</label>
+                                   <input type="text" ng-model="cusInfo.CustomerName" class="form-control" required />
+                               </div>
+                               <div class="form-group">
+                                   <label>Người đại diện</label>
+                                   <input type="text" ng-model="cusInfo.Deputy" class="form-control" required />
+                               </div>
+                               <div class="form-group">
+                                   <label>Điện thoại</label>
+                                   <input type="text" ng-model="cusInfo.Phone" class="form-control" required />
+                               </div>
+                               <div class="form-group">
+                                   <label>Địa chỉ Email</label>
+                                   <input type="text" ng-model="cusInfo.Email" class="form-control" required />
+                               </div>
+                               <div class="form-group">
+                                   <label>Địa chỉ lấy hàng</label>
+                                   <input type="text" ng-model="cusInfo.Address" class="form-control" required />
+                               </div>
+
+                               <button class="btn btn-primary" type="submit">Chỉnh sửa thông tin</button>
+                           </div>
+
+                           <div class="col-lg-6 col-md-6 col-sm-12">
+                               <div class="form-group">
+                                   <label>Tỉnh thành</label>
+                                   <select ui-select2 ng-model="cusInfo.ProvinceID" class="form-control" required ng-change="provinceChange('d')">
+                                       <option ng-repeat="item in provinces" value="{{item.code}}">{{item.name}}</option>
+                                   </select>
+                               </div>
+                               <div class="form-group">
+                                   <label>Quận huyện</label>
+                                   <select ui-select2 ng-model="cusInfo.DistrictID" class="form-control" required ng-change="provinceChange('w')">
+                                       <option ng-repeat="item in districts" value="{{item.code}}">{{item.name}}</option>
+                                   </select>
+                               </div>
+                               <div class="form-group">
+                                   <label>Phường xã</label>
+                                   <select ui-select2 ng-model="cusInfo.WardID" class="form-control" required>
+                                       <option ng-repeat="item in wards" value="{{item.code}}">{{item.name}}</option>
+                                   </select>
+                               </div>
+                           </div>
+
+                       </div>
+                   </form>
+
+               </div>
+               <!-- end x_content-->
+           </div>
+           <!-- end x_pannel-->
+       </div>
+   </div>
+</div>
+
+
+@section scripts {
+
+    <script src="~/Scripts/userinfo.js"></script>
+}

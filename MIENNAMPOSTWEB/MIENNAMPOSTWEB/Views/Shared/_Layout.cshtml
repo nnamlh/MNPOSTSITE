@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+    <title>@ViewBag.Title - Bưu Chính Miền Nam</title>
+    <!-- Basic Page Needs
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="~/Content/css/ionicons.min.css">
+    <!-- Animation -->
+    <link rel="stylesheet" href="~/Content/css/animate.css">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/Content/css/owl.theme-min.css">
+    <!-- Colorbox -->
+    <link rel="stylesheet" href="~/Content/css/colorbox.css">
+    <!-- Template styles-->
+    <link rel="stylesheet" href="~/Content/css/style.css">
+    <!-- Responsive styles-->
+    <link rel="stylesheet" href="~/Content/css/responsive.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+
+    @RenderSection("styles", required: false)
+
+</head>
+<body>
+
+    <!-- Header start -->
+    <header id="header" class="header">
+        <div class="container">
+            <div class="row">
+                <div class="logo col-12 col-md-3">
+                    <div class="logo-area">
+                        <a href="/">
+                            <img class="img-fluid-2" src="~/Content/images/logo.png" alt="">
+                        </a>
+                    </div>
+                </div><!-- logo end -->
+
+                <div class="col-12 col-md-8 ml-auto header-right">
+                    <ul class="top-info">
+                        <li>
+                            <div class="info-box">
+                                <span class="info-icon"><i class="fa fa-phone">&nbsp;</i></span>
+                                <div class="info-box-content">
+                                    <h3 class="info-box-title">Tổng đài hổ trợ</h3>
+                                    <h4 class="info-box-subtitle"> (028) 36.369.369</h4>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="info-box">
+                                <span class="info-icon"><i class="fa fa-envelope-o">&nbsp;</i></span>
+                                <div class="info-box-content">
+                                    <h3 class="info-box-title">Email liên hệ</h3>
+                                    <h4 class="info-box-subtitle">cskh@miennampost.vn</h4>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="consult">
+                                <a href="/donhang/create"><span>Tạo đơn hàng</span></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- header right end -->
+            </div><!-- Row end -->
+        </div><!-- Container end -->
+    </header><!--/ Header end -->
+
+    <div class="site-navigation navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="site-nav-inner">
+                        <nav class="navbar navbar-expand-lg">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon">
+                                    <i class="fa fa-bars"></i>
+                                </span>
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                        <a href="/" class="nav-link">
+                                            Trang chủ
+                                        </a>
+                                    </li>
+                                    <li class="nav-item"><a href="/baiviet/gioithieu">Giới thiệu</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/dichvu/xem">Dịch vụ</a></li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link" href="/home/contact">Liên hệ</a>
+                                    </li>
+                                    <li class="search nav-item d-none d-lg-inline-block">
+                                        <button class="fa fa-search nav-link">&nbsp;&nbsp;Tra cứu</button>
+                                    </li>
+                                </ul><!--/ Nav ul end -->
+                            </div>
+                        </nav><!--/ Collapse end -->
+                    </div><!-- Site navbar end -->
+                </div><!--/ Cold end -->
+            </div><!--/ Row end -->
+        </div><!--/ Container end -->
+
+        <div class="site-search search-full-width">
+            <div class="container">
+                <input type="text" placeholder="Nhập mã vận đơn để tra cứu">
+                <span class="close">×</span>
+            </div>
+        </div>
+    </div><!--/ Navigation end -->
+
+
+    @RenderBody()
+
+    <!-- Footer start -->
+    <footer id="footer" class="footer">
+        <div class="angle-bg"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <H3 style="color: white">BƯU CHÍNH MIỀN NAM</H3>
+                </div>
+                <div class="col-lg-4 col-md-6 ml-lg-auto">
+                    <div class="footer-top-call">
+                        <h3><i class="ion-android-call"></i>  (028) 36.369.369</h3>
+                    </div>
+                </div>
+            </div><!-- Row end -->
+
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12 footer-widget">
+                    <h3 class="widget-title">Về Bưu Chính Miền Nam</h3>
+                    <p class="footer-about-desc">
+                        Chúng tôi là công ty Bưu Chính, được thành lập với mục tiêu đem đến một thương hiệu đảm bảo tin tưởng cho quý khách khi có nhu cầu vận chuyển hàng hóa
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class="ion-social-facebook"></i></a>
+                        <a href="#"><i class="ion-social-twitter"></i></a>
+                        <a href="#"><i class="ion-social-googleplus"></i></a>
+                        <a href="#"><i class="ion-social-instagram"></i></a>
+                        <a href="#"><i class="ion-social-youtube"></i></a>
+                    </div>
+                </div><!-- Footer widget end -->
+
+                <div class="col-lg-4 col-md-6 col-12 footer-widget">
+                    <h3 class="widget-title">Thông tin liên hệ</h3>
+                    <div class="contact-info-box">
+                        <i class="ion-ios-location"></i>
+                        <div class="contact-info-box-content">
+                            <p>466/19 Nguyễn Tất Thành, Phường 18, Quận 4, Tp. Hồ Chí Minh</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-box">
+                        <i class="ion-email"></i>
+                        <div class="contact-info-box-content">
+                            <p>cskh@miennampost.vn</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-box">
+                        <i class="ion-android-call"></i>
+                        <div class="contact-info-box-content">
+                            <p>(028) 36 369 369</p>
+                            <p>(+84) 090 690 088 8</p>
+                        </div>
+                    </div>
+                </div><!-- Footer widget end -->
+
+                <div class="col-lg-4 col-md-6 col-12 footer-widget newsletter-widget">
+
+                    <h5 class="widget-title">Đăng ký nhận thông tin</h5>
+
+                    <form action="#" method="post" id="newsletter-form" class="newsletter-form">
+                        <div class="form-group">
+                            <input type="email" name="email" id="newsletter-form-email"
+                                   class="form-control form-control-lg" placeholder="Địa chỉ email của quý khách"
+                                   autocomplete="off">
+                            <button class="btn btn-primary">Xác nhận</button>
+                        </div>
+                    </form>
+                </div><!-- Footer widget end -->
+
+            </div><!--/ Content row end -->
+
+            <div class="row copyright">
+                <div class="col-12 col-md-5">
+                    <div class="copyright-info">
+                        <span>Copyright © 2018 An Phát. Bưu Chính Miền Nam.</span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 ml-md-auto">
+                    <div class="footer-menu">
+                        <ul class="nav unstyled ">
+                            <li><a href="#">Điều khoản</a></li>
+                            <li><a href="#">Chính sách</a></li>
+                            <li><a href="#">Hỏi đáp</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div><!-- Copyright -->
+
+        </div><!--/ Container end -->
+    </footer><!-- Footer end -->
+    <!-- Javascript Files
+    ================================================== -->
+    <!-- initialize jQuery Library -->
+    <script type="text/javascript" src="~/Content/js/jquery.js"></script>
+    <!-- Popper JS -->
+    <script type="text/javascript" src="~/Content/js/popper.min.js"></script>
+    <!-- Bootstrap jQuery -->
+    <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
+    <!-- Owl Carousel -->
+    <script type="text/javascript" src="~/Content/js/owl.carousel.min.js"></script>
+    <!-- Counter -->
+    <script type="text/javascript" src="~/Content/js/jquery.counterup.min.js"></script>
+    <!-- Color box -->
+    <script type="text/javascript" src="~/Content/js/jquery.colorbox.js"></script>
+    <!-- Waypoints -->
+    <script type="text/javascript" src="~/Content/js/waypoints.min.js"></script>
+    <!-- Isotope -->
+    <script type="text/javascript" src="~/Content/js/isotope.js"></script>
+    <script type="text/javascript" src="~/Content/js/ini.isotope.js"></script>
+    <!-- Wow -->
+    <script type="text/javascript" src="~/Content/js/wow.min.js"></script>
+    <!-- Template custom -->
+    <script type="text/javascript" src="~/Content/js/custom.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular-sanitize.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

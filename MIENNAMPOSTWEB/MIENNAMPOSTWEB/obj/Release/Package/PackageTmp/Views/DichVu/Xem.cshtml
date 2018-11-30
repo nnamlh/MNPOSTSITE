@@ -1,0 +1,55 @@
+﻿@model MIENNAMPOSTWEB.Models.Article
+@{
+    ViewBag.Title = "Xem";
+
+    var dichVues = ViewBag.DichVues as IEnumerable<MIENNAMPOSTWEB.Models.Article>;
+}
+
+<div id="banner-area" class="banner-area" style="background-image:url(/Content/images/banner/banner.png)">
+    <!-- Subpage title start -->
+    <div class="banner-text text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="banner-heading">
+                        <h1 class="banner-title">DỊCH VỤ</h1>
+                        <h2 class="banner-desc">Bưu Chính Miền Nam</h2>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li>Trang chủ</li>
+                        <li>Dịch vụ</li>
+                        <li><a href="/dichvu/xem/@Model.Code">@Model.Title.ToUpper()</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div><!-- Subpage title end -->
+</div><!-- Banner area end -->
+
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-12">
+                <div class="sidebar sidebar-left">
+                    <div class="widget">
+                        <h3 class="widget-title">Danh sách dịch vụ</h3>
+                        <ul class="nav nav-tabs flex-column">
+                            @foreach (var item in dichVues)
+                            {
+                                <li><a href="/dichvu/xem/@item.Code">@item.Title.ToUpper()</a></li>
+                            }
+                        </ul>
+                    </div><!-- Navigation end -->
+
+                </div><!-- Sidebar end -->
+            </div><!--/ Content col 4 end -->
+
+            <div class="col-lg-9 col-md-12">
+                <div class="single-practice">
+                    @Html.Raw(Model.Content)
+                </div><!-- Practice details end -->
+
+            </div><!--/ Content col 8 end -->
+        </div><!-- Row end -->
+    </div><!-- Container end -->
+</section><!-- Main container end -->

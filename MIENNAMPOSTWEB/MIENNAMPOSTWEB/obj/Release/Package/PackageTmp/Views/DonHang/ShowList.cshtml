@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "ShowList";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Danh sách đơn hàng</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- end x_title-->
+                <div class="x_content">
+                    <div class="row">
+                        <form name="formSearch" ng-submit="GetData()">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Nhập mã vận đơn</label>
+                                    <div class="row">
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control" ng-model="searchInfo.search" my-enter="GetData()">
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <select class="form-control" ng-model="searchInfo.status" convert-to-number>
+                                                <option ng-repeat="item in status" value="{{item.code}}">{{item.name | uppercase}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Thời gian</label>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <input type="text" required class="form-control" ui-mask="99/99/9999" model-view-value="true" ui-mask-placeholder ui-mask-placeholder-char="" ng-model="searchInfo.fromDate">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" required class="form-control" ui-mask="99/99/9999" model-view-value="true" ui-mask-placeholder ui-mask-placeholder-char="" ng-model="searchInfo.toDate">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button class="btn btn-primary" type="submit">Xem thông tin</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- thong tin-->
+                        <div class="col-md-12">
+                            <!-- table data-->
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-condensed">
+                                    <thead>
+                                        <tr class="headings">
+                                            <th><input type="checkbox" ng-model="checkMailers" ng-change="checkAll()" /></th>
+                                            <th>STT</th>
+                                            <th>Vận đơn</th>
+                                            <th>TT gửi</th>
+                                            <th>TT nhận</th>
+                                            <th>TT hàng</th>
+                                            <th>TT cước</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr ng-repeat="item in mailers">
+                                            <td><input type="checkbox" ng-model="item.isCheck" /></td>
+                                            <td>
+                                                {{$index + 1}}
+                                            </td>
+                                            <td>
+                                                <strong>Mã VĐ: </strong>{{item.MailerID}} <br />
+                                                <strong>Ngày lập: </strong>{{item.AcceptDate}} <br />
+                                                <strong>BC nhận: </strong>{{item.PostOfficeAcceptID}} <br />
+                                                <strong>BC H/tại: </strong>{{item.CurrentPostOfficeID}}<br />
+                                                <strong>Trạng thái: </strong><span class="label label-info">{{findStatus(item.CurrentStatusID)}}</span><br /><br />
+                                                <a href="#" class="label label-primary" ng-click="showMailerDetail($index)">Chi tiết</a> &nbsp;&nbsp;
+                                                <a href="/Report/Viewer/MailerPrint.aspx?mailer={{item.MailerID}}" target="_blank">In phiếu</a>
+                                            </td>
+                                            <td>
+                                                <strong>Tên NgGửi: </strong> {{item.SenderName}} <br />
+                                                <strong>ĐT NgGửi: </strong> {{item.SenderPhone}} <br />
+                                                <strong>Đ/Chỉ NgGửi: </strong> {{item.SenderAddress}} <br />
+                                                <strong>T/Thành NgGửi: </strong> {{item.SendProvinceName}} <br />
+                                                <strong>Q/Huyện NgGửi: </strong> {{item.SendDistrictName}}
+                                            </td>
+                                            <td>
+                                                <strong>Tên NgNhận: </strong> {{item.RecieverName}} <br />
+                                                <strong>ĐT NgNhận: </strong> {{item.RecieverPhone}} <br />
+                                                <strong>Đ/Chỉ NgNhận: </strong> {{item.RecieverAddress}} <br />
+                                                <strong>T/Thành NgNhận: </strong> {{item.RecieProvinceName}} <br />
+                                                <strong>Q/Huyện NgNhận: </strong> {{item.ReceiDistrictName}} <br />
+                                                <strong>P/xã NgNhận: </strong> {{item.RecieWardName}} <br />
+                                            </td>
+                                            <td>
+                                                <strong>Dịch vụ: </strong>{{item.MailerTypeID}}<br />
+                                                <strong>HT Thanh toán: </strong>{{item.PaymentMethodID}}<br />
+                                                <strong>Trọng lượng: </strong>{{item.Weight}} Gram<br />
+                                                <strong>Số lượng: </strong>{{item.Quantity}}<br />
+                                                <strong>Tiền thu: </strong>{{item.COD |  currency: 'VND ':0}}<br />
+                                                <strong>Loại hàng: </strong>{{item.MerchandiseID}}<br />
+                                                <strong>Nội dung hàng: </strong>{{item.MailerDescription}}<br />
+                                                <strong>Ghi chú: </strong>{{item.Notes}}
+                                            </td>
+                                            <td>
+                                                <strong>Phụ phí: </strong> {{item.PriceService |  currency: 'VND ':0}} <br />
+                                                <strong>Cước CoD: </strong> {{item.PriceCoD |  currency: 'VND ':0}} <br />
+                                                <strong>Cước chính: </strong> {{item.PriceDefault |  currency: 'VND ':0}} <br />
+                                                <strong>Tổng cước: </strong> {{item.Amount |  currency: 'VND ':0}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!--phan trang-->
+                                <ul items-per-page="itemPerPage" uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" boundary-link-numbers="true" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+                                <!-- end phan trang-->
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- end x_content-->
+            </div>
+            <!-- end x_pannel-->
+        </div>
+    </div>
+
+</div>
+
+
+@section scripts {
+    <script>
+        var info = '@ViewBag.InfoID';
+        var currentDate = '@DateTime.Now.ToString("dd/MM/yyyy")';
+        var fromDate = '@DateTime.Now.AddDays(-7).ToString("dd/MM/yyyy")';
+        var toDate = '@DateTime.Now.AddDays(1).ToString("dd/MM/yyyy")';
+
+    </script>
+    <script src="~/Scripts/ordershow.js"></script>
+}

@@ -1,0 +1,109 @@
+﻿@model IEnumerable<MIENNAMPOSTWEB.Models.GroupArticle>
+@{
+    ViewBag.Title = "Tạo bài viết";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Thông tin của bạn</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- end x_title-->
+                <div class="x_content">
+                    <form class="form-validate form-horizontal admin_form" method="post" enctype="multipart/form-data" onsubmit="if(!confirm('Thêm bài viết?')){return false;}">
+
+                        <div class="form-group ">
+                            <label for="cname" class="control-label col-lg-2">Danh mục</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" name="GroupId">
+                                    @foreach (var item in Model)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="cname" class="control-label col-lg-2">Tiêu đề<span class="required">*</span></label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="Title" type="text" required />
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="cname" class="control-label col-lg-2">Url<span class="required">*</span></label>
+                            <div class="col-lg-9">
+                                <input class="form-control" name="Code" type="text" required />
+                            </div>
+                            <div class="col-lg-1">
+                                <button type="button" class="btn btn-primary" onclick="geturl()">Auto</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="cname" class="control-label col-lg-2">Hình ảnh(370x245)<span class="required">*</span></label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="image" type="file" accept="image/*" />
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="curl" class="control-label col-lg-2">Mô tả ngắn<span class="required">*</span></label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" placeholder="Place some text here"
+                                          name="Describe" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="ccomment" class="control-label col-lg-2">Mô tả chi tiết<span class="required">*</span></label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" placeholder="Place some text here"
+                                          name="contentEditor" required></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button class="btn btn-primary" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <!-- end x_content-->
+            </div>
+            <!-- end x_pannel-->
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+    <!-- ckeditor -->
+    <script src="//cdn.ckeditor.com/4.11.1/full/ckeditor.js"></script>
+    <script type="text/javascript">
+        initeditor();
+
+        function geturl() {
+            var title = $("[name='Title']").val();
+            console.log(title);
+            $.ajax({
+                url: "/mnquantri/geturl",
+                type: "get",
+                data: { title: title },
+                success: function (result) {
+                    $("[name='Code']").val(result.Url);
+                }
+            });
+        }
+
+    </script>
+}

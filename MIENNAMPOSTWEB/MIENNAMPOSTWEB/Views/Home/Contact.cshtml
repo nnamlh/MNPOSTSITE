@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "Liên hệ";
+}
+
+<div id="banner-area" class="banner-area" style="background-image:url(/Content/images/banner/banner.png)">
+    <!-- Subpage title start -->
+    <div class="banner-text text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="banner-heading">
+                        <h1 class="banner-title">LIÊN HỆ</h1>
+                        <h2 class="banner-desc">Bưu Chính Miền Nam</h2>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li>Trang chủ</li>
+                        <li><a href="/home/contact">Liên hệ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div><!-- Subpage title end -->
+</div><!-- Banner area end -->
+
+<section id="main-container" class="main-container">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12">
+                <!-- Map start here -->
+                <div id="map-wrapper" class="no-padding">
+                    <div class="map" id="map"></div>
+                </div><!--/ Map end here -->
+            </div>
+        </div><!-- Content row  end -->
+
+        <div class="gap-60"></div>
+
+
+        <div class="row">
+
+
+
+            <div class="col-md-4">
+                <div class="contact-page-info">
+                    <div class="contact-info-box">
+                        <i class="ion-ios-location"></i>
+                        <div class="contact-info-box-content">
+                            <h4>Địa chỉ</h4>
+                            <p>466/19 Nguyễn Tất Thành, Phường 18, Quận 4, Tp. Hồ Chí Minh</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- Contact info col end -->
+            <div class="col-md-4">
+                <div class="contact-page-info">
+                    <div class="contact-info-box">
+                        <i class="ion-email"></i>
+                        <div class="contact-info-box-content">
+                            <h4>Email:</h4>
+                            <p>cskh@miennampost.vn</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- Contact info col end -->
+
+            <div class="col-md-4">
+                <div class="contact-page-info">
+                    <div class="contact-info-box">
+                        <i class="ion-android-call"></i>
+                        <div class="contact-info-box-content">
+                            <h4>
+                                Tổng đài:
+                                <p>(028) 36 369 369</p>
+                                <p>(+84) 090 690 088 8</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- Contact info col end -->
+
+        </div><!--/ Content row end -->
+    </div><!--/ Container end -->
+
+</section><!-- Main container end -->
+
+
+@section scripts {
+    <!-- Google Map -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCsa2Mi2HqyEcEnM1urFSIGEpvualYjwwM"></script>
+    <!-- Doc https://developers.google.com/maps/documentation/javascript/get-api-key -->
+    <!-- For latitude and longitude use http://www.latlong.net/ -->
+
+    <script type="text/javascript" src="~/Content/js/gmap3.min.js"></script>
+    <script type="text/javascript">
+
+        /* Contact map */
+
+        var contactmap = { lat: 10.762044, lng: 106.70878 };
+
+        $('#map')
+            .gmap3({
+                zoom: 13,
+                center: contactmap,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                scrollwheel: false
+            })
+
+            .marker({
+                position: contactmap
+            })
+
+            .infowindow({
+                position: contactmap,
+                content: "Bưu Chính Miền Nam"
+            })
+
+            .then(function (infowindow) {
+                var map = this.get(0);
+                var marker = this.get(1);
+                marker.addListener('click', function () {
+                    infowindow.open(map, marker);
+                });
+            });
+
+
+    </script>}

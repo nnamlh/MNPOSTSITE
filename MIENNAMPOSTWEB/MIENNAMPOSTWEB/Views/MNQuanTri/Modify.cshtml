@@ -1,0 +1,111 @@
+﻿@model MIENNAMPOSTWEB.Models.Article
+@{
+    ViewBag.Title = "Modify";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Thông tin của bạn</h2>
+                <div class="clearfix"></div>
+            </div>
+            <!-- end x_title-->
+            <div class="x_content">
+                <form class="form-validate form-horizontal admin_form" method="post" enctype="multipart/form-data" onsubmit="if(!confirm('Chỉnh bài viết?')){return false;}">
+
+                    <input type="hidden" name="Id" value="@Model.Id" />
+
+                    <div class="form-group ">
+                        <label for="cname" class="control-label col-lg-2">Danh mục</label>
+                        <div class="col-lg-10">
+                            <select class="form-control" name="DanhMucId">
+                                @foreach (var item in ViewBag.DanhMuc)
+                                {
+                                    if (item.Id == Model.GroupId)
+                                    {
+                                        <option value="@item.Id" selected>@item.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="cname" class="control-label col-lg-2">Tiêu đề<span class="required">*</span></label>
+                        <div class="col-lg-10">
+                            <input class="form-control" name="Title" type="text" required value="@Model.Title" />
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label for="cname" class="control-label col-lg-2">Url<span class="required">*</span></label>
+                        <div class="col-lg-9">
+                            <input class="form-control" name="Url" type="text" required value="@Model.Code" />
+                        </div>
+                        <div class="col-lg-1">
+                            <button type="button" class="btn btn-primary" onclick="geturl()">Auto</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="cname" class="control-label col-lg-2">Hình ảnh(500x344)<span class="required">*</span></label>
+                        <div class="col-lg-10">
+                            <input class="form-control" name="image" type="file" accept="image/*" />
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="curl" class="control-label col-lg-2">Mô tả ngắn<span class="required">*</span></label>
+                        <div class="col-lg-10">
+                            <textarea class="form-control" placeholder="Place some text here"
+                                      name="ShortContent" required>@Model.Describe</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="ccomment" class="control-label col-lg-2">Mô tả chi tiết<span class="required">*</span></label>
+                        <div class="col-lg-10">
+                            <textarea class="form-control" placeholder="Place some text here"
+                                      name="contentEditor" required>@Model.Content</textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button class="btn btn-primary" type="submit">Save</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+<script src="//cdn.ckeditor.com/4.11.1/full/ckeditor.js"></script>
+    <script type="text/javascript">
+        initeditor();
+
+        function geturl() {
+            var title = $("[name='Title']").val();
+            console.log(title);
+            $.ajax({
+                url: "/adminga/geturl",
+                type: "get",
+                data: { title: title },
+                success: function (result) {
+                    $("[name='Url']").val(result.Url);
+                }
+            });
+        }
+
+    </script>
+}

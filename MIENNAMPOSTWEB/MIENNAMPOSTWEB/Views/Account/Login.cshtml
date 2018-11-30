@@ -1,0 +1,87 @@
+﻿@using MIENNAMPOSTWEB.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Đăng nhập Bưu Chính Miền Nam";
+}
+
+<section id="main-container" class="main-container">
+
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h3 class="title-head">Đăng nhập Bưu Chính Miền Nam</h3>
+            </div>
+        </div><!--/ Title row end -->
+
+        <div class="row">
+            <div class="col-sm-8">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+            {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(m => m.RememberMe)
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Đăng nhập" class="btn btn-primary" />
+                    </div>
+                    <p>
+                        @Html.ActionLink("Đăng kí tài khoản mới", "Register")
+                    </p>
+                    <p>
+                        @Html.ActionLink("Quên mật khẩu?", "ForgotPassword")
+                    </p>
+                }
+            </div>
+
+            <div class="col-md-4 col-12">
+                <div class="sidebar sidebar-right">
+                    <div class="widget">
+                        <h3 class="widget-title">Liên hệ</h3>
+
+                        <div class="contact-info-box">
+                            <i class="ion-ios-location"></i>
+                            <div class="contact-info-box-content">
+                                <p>466/19 Nguyễn Tất Thành, Phường 18, Quận 4, Tp. Hồ Chí Minh</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-box">
+                            <i class="ion-email"></i>
+                            <div class="contact-info-box-content">
+                                <p>cskh@miennampost.vn</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-box">
+                            <i class="ion-android-call"></i>
+                            <div class="contact-info-box-content">
+                                <p>(028) 36 369 369</p>
+                                <p>(+84) 090 690 088 8</p>
+                            </div>
+                        </div>
+
+                    </div><!-- Navigation end -->
+
+                </div><!-- Sidebar end -->
+            </div><!--/ Content col 4 end -->
+        </div>
+
+    </div><!--/ Container end -->
+
+</section><!-- Main container end -->
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,42 @@
+﻿@model MIENNAMPOSTWEB.Models.Article
+@{
+    ViewBag.Titile = "Giới thiệu Bưu Chính Miền Nam";
+}
+<div id="banner-area" class="banner-area" style="background-image:url(/Content/images/banner/banner.png)">
+    <!-- Subpage title start -->
+    <div class="banner-text text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="banner-heading">
+                        <h1 class="banner-title">GIỚI THIỆU</h1>
+                        <h2 class="banner-desc">Bưu Chính Miền Nam</h2>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li>Trang chủ</li>
+                        <li><a href="/baiviet/gioithieu">Giới thiệu</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div><!-- Subpage title end -->
+</div><!-- Banner area end -->
+
+
+<section id="main-container" class="main-container">
+
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h3 class="title-head">Giới thiệu</h3>
+            </div>
+        </div><!--/ Title row end -->
+
+        <div class="row">
+            <div class="featured-tab clearfix">
+                @Html.Raw(Model.Content)
+            </div> <!-- COl End -->
+        </div><!--/ Content row end -->
+    </div><!--/ Container end -->
+
+</section><!-- Main container end -->
