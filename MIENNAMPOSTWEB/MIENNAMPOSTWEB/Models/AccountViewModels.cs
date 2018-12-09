@@ -92,6 +92,41 @@ namespace MIENNAMPOSTWEB.Models
         public string PhoneNumber { get; set; }
     }
 
+    public class RegisterExternalModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Mật khẩu")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Nhập lại mật khẩu")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Người liên hệ")]
+        public string FullName { get; set; }
+
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Số điện thoại")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Mã khách hàng")]
+        public string CustomerId { get; set; }
+    }
+
     public class ResetPasswordViewModel
     {
         [Required]

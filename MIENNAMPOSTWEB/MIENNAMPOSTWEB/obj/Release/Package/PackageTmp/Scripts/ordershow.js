@@ -39,7 +39,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope) {
         showLoader(true);
         $http({
             method: "POST",
-            url: "/order/GetData",
+            url: "/donhang/GetData",
             data: {
                 data: JSON.stringify($scope.searchInfo)
             }
@@ -69,7 +69,6 @@ app.controller('myCtrl', function ($scope, $http, $rootScope) {
             $scope.mailers[i].isCheck = $scope.checkMailers;
         }
     };
-
 
 
 });

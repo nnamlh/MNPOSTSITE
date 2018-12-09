@@ -6,11 +6,17 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using MIENNAMPOSTWEB.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security.OAuth;
+using MIENNAMPOSTWEB.Providers;
 
 namespace MIENNAMPOSTWEB
 {
     public partial class Startup
     {
+
+       
+
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -36,7 +42,7 @@ namespace MIENNAMPOSTWEB
                 }
             });            
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
-
+            app.UseOAuthBearerTokens(OAuthOptions);
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
             app.UseTwoFactorSignInCookie(DefaultAuthenticationTypes.TwoFactorCookie, TimeSpan.FromMinutes(5));
 

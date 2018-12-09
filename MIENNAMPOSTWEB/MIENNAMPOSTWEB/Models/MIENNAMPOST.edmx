@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MIENNAMPOSTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AddressTemp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="AddressInfo" Type="nvarchar(max)" />
+          <Property Name="ProvinceId" Type="nvarchar" MaxLength="128" />
+          <Property Name="DistrictId" Type="nvarchar" MaxLength="128" />
+          <Property Name="WardId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="Article">
           <Key>
             <PropertyRef Name="Id" />
@@ -160,6 +172,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MIENNAMPOSTModelStoreContainer">
+          <EntitySet Name="AddressTemp" EntityType="Self.AddressTemp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -301,6 +314,7 @@
             <End Role="GroupArticle" EntitySet="GroupArticles" />
             <End Role="Article" EntitySet="Articles" />
           </AssociationSet>
+          <EntitySet Name="AddressTemps" EntityType="MIENNAMPOSTModel.AddressTemp" />
         </EntityContainer>
         <EntityType Name="TokenData">
           <Key>
@@ -348,6 +362,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AddressTemp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AddressInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinceId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DistrictId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="WardId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -440,6 +466,19 @@
           <EntitySetMapping Name="GroupArticles">
             <EntityTypeMapping TypeName="MIENNAMPOSTModel.GroupArticle">
               <MappingFragment StoreEntitySet="GroupArticle">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AddressTemps">
+            <EntityTypeMapping TypeName="MIENNAMPOSTModel.AddressTemp">
+              <MappingFragment StoreEntitySet="AddressTemp">
+                <ScalarProperty Name="WardId" ColumnName="WardId" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="AddressInfo" ColumnName="AddressInfo" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

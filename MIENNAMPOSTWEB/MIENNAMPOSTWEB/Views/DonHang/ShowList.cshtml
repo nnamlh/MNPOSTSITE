@@ -80,8 +80,7 @@
                                                 <strong>BC nhận: </strong>{{item.PostOfficeAcceptID}} <br />
                                                 <strong>BC H/tại: </strong>{{item.CurrentPostOfficeID}}<br />
                                                 <strong>Trạng thái: </strong><span class="label label-info">{{findStatus(item.CurrentStatusID)}}</span><br /><br />
-                                                <a href="#" class="label label-primary" ng-click="showMailerDetail($index)">Chi tiết</a> &nbsp;&nbsp;
-                                                <a href="/Report/Viewer/MailerPrint.aspx?mailer={{item.MailerID}}" target="_blank">In phiếu</a>
+                                                <a href="/donhang/chitiet/{{item.MailerID}}" target="_blank" class="label label-primary">Chi tiết</a>
                                             </td>
                                             <td>
                                                 <strong>Tên NgGửi: </strong> {{item.SenderName}} <br />

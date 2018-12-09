@@ -11,7 +11,6 @@ using Microsoft.Owin.Security;
 using MIENNAMPOSTWEB.Models;
 using MIENNAMPOSTWEB.Utils;
 using System.Web.Script.Serialization;
-using MIENNAMPOSTWEB.Models;
 
 namespace MIENNAMPOSTWEB.Controllers
 {
@@ -76,9 +75,27 @@ namespace MIENNAMPOSTWEB.Controllers
                 return View(model);
             }
 
+            MIENNAMPOSTEntities db = new MIENNAMPOSTEntities();
+
+            var find = db.AspNetUsers.Where(p => p.UserName == model.Email).FirstOrDefault();
+
+            if (find != null)
+            {
+                if (find.EmailConfirmed == false)
+                {
+                    ModelState.AddModelError("", "Chúng tôi đã gửi 1 email tới cho bạn để xác nhận.");
+                    return View(model);
+                }
+                else if (find.IsActive == false)
+                {
+                    ModelState.AddModelError("", "Tài khoản bạn đang tạm khóa.");
+                    return View(model);
+                }
+            }
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -145,6 +162,11 @@ namespace MIENNAMPOSTWEB.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult FinishRegister()
+        {
+            return View();
+        }
         //
         // POST: /Account/Register
         [HttpPost]
@@ -165,37 +187,15 @@ namespace MIENNAMPOSTWEB.Controllers
                 }
                 else
                 {
-                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNumber, FullName = model.FullName };
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNumber, FullName = model.FullName, IsActive = false };
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
-                        var findUser = db.AspNetUsers.Where(p => p.UserName == model.Email).FirstOrDefault();
-                        UserManager.AddToRole(findUser.Id, "user");
+                        string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                        // send info
-                        var dataSend = new AddCustomerSend()
-                        {
-                            clientUser = model.Email,
-                            email = model.Email,
-                            fullName = model.FullName,
-                            phone = model.PhoneNumber
-                        };
-
-                        string json = new JavaScriptSerializer().Serialize(dataSend);
-
-                        var addRes = RequestHandle.SendPost(APISource.ROOTURL + "api/customer/AddCustomer", json, true);
-
-                        var addResultPaser = new JavaScriptSerializer().Deserialize<AddCustomerResult>(addRes);
-
-                        if (addResultPaser.error == 0)
-                        {
-                            findUser.IDClient = addResultPaser.data;
-                            db.Entry(findUser).State = System.Data.Entity.EntityState.Modified;
-                            db.SaveChanges();
-                        }
-
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return Redirect("/user/show");
+                        return Redirect("/account/finishregister");
                     }
                     AddErrors(result);
                 }
@@ -206,6 +206,70 @@ namespace MIENNAMPOSTWEB.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult> RegisterExternal(RegisterExternalModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var find = db.AspNetUsers.Where(p => p.IDClient == model.CustomerId).FirstOrDefault();
+
+                if(find != null)
+                {
+                    return Json(new { error = 0, user = find.UserName }, JsonRequestBehavior.AllowGet);
+                }
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNumber, FullName = model.FullName, IsActive = true, EmailConfirmed = true, IDClient = model.CustomerId };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    return Json(new { error = 0, user = user.UserName }, JsonRequestBehavior.AllowGet);
+                }
+                AddErrors(result);
+            }
+
+            var errors = ModelState.Select(x => x.Value.Errors)
+                         .Where(y => y.Count > 0)
+                         .FirstOrDefault();
+            // If we got this far, something failed, redisplay form
+            return Json(new ResultInfo()
+            {
+                error = 1,
+                msg = errors.Select(p => p.ErrorMessage).FirstOrDefault()
+            });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult DisableAccount(string user, bool isActice)
+        {
+            if (ModelState.IsValid)
+            {
+                var find = db.AspNetUsers.Where(p => p.UserName == user).FirstOrDefault();
+                
+                if(find !=null)
+                {
+                    find.IsActive = isActice;
+                    db.Entry(find).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Sai tài khoản");
+                }
+
+            }
+
+            var errors = ModelState.Select(x => x.Value.Errors)
+                         .Where(y => y.Count > 0)
+                         .FirstOrDefault();
+            // If we got this far, something failed, redisplay form
+            return Json(new ResultInfo()
+            {
+                error = 1,
+                msg = errors.Select(p => p.ErrorMessage).FirstOrDefault()
+            });
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -216,7 +280,47 @@ namespace MIENNAMPOSTWEB.Controllers
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+
+            if (result.Succeeded)
+            {
+                try
+                {
+                    var findUser = db.AspNetUsers.Find(userId);
+                    findUser.IsActive = true;
+                    db.Entry(findUser).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    UserManager.AddToRole(findUser.Id, "user");
+                    // send info
+                    var dataSend = new AddCustomerSend()
+                    {
+                        clientUser = findUser.Email,
+                        email = findUser.Email,
+                        fullName = findUser.FullName,
+                        phone = findUser.PhoneNumber
+                    };
+
+                    string json = new JavaScriptSerializer().Serialize(dataSend);
+
+                    var addRes = RequestHandle.SendPost(APISource.ROOTURL + "api/customer/AddCustomer", json, true);
+
+                    var addResultPaser = new JavaScriptSerializer().Deserialize<AddCustomerResult>(addRes);
+
+                    if (addResultPaser.error == 0)
+                    {
+                        findUser.IDClient = addResultPaser.data;
+                        db.Entry(findUser).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                    }
+
+                    return Redirect("/user/show");
+                }
+                catch
+                {
+                    return View("Error");
+                }
+            }
+
+            return View("Error");
         }
 
         //
@@ -240,15 +344,16 @@ namespace MIENNAMPOSTWEB.Controllers
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    return RedirectToAction("ForgotPasswordConfirmation", "Account");
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form

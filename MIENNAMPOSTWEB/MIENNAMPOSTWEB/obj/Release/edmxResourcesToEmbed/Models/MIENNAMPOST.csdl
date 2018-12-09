@@ -108,6 +108,7 @@
       <End Role="GroupArticle" EntitySet="GroupArticles" />
       <End Role="Article" EntitySet="Articles" />
     </AssociationSet>
+    <EntitySet Name="AddressTemps" EntityType="MIENNAMPOSTModel.AddressTemp" />
   </EntityContainer>
   <EntityType Name="TokenData">
     <Key>
@@ -155,4 +156,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="AddressTemp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="AddressInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProvinceId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DistrictId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="WardId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using MIENNAMPOSTWEB.Models;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace MIENNAMPOSTWEB
 {
@@ -18,7 +20,31 @@ namespace MIENNAMPOSTWEB
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
+            var msg = new MimeMessage();
+
+            msg.From.Add(new MailboxAddress("BƯU CHÍNH MIỀN NAM", "cskh@miennampost.vn"));
+            msg.To.Add(new MailboxAddress("", message.Destination));
+            msg.Subject =  message.Subject;
+
+            var bodyBuilder = new BodyBuilder();
+            bodyBuilder.HtmlBody = message.Body;
+
+            msg.Body = bodyBuilder.ToMessageBody();
+
+            using (var client = new SmtpClient())
+            {
+                // For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
+                client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+
+                client.Connect("mail92100.maychuemail.com", 465, true);
+
+                // Note: only needed if the SMTP server requires authentication
+                client.Authenticate("cskh@miennampost.vn", "cskh@mnp");
+
+                client.Send(msg);
+                client.Disconnect(true);
+            }
+
             return Task.FromResult(0);
         }
     }

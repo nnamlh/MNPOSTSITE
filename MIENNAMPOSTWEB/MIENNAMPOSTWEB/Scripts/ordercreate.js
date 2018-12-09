@@ -28,7 +28,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope) {
             $scope.provinces = angular.fromJson(response.data);
         });
 
-        $http.get("/order/GetSetting").then(function (response) {
+        $http.get("/donhang/GetSetting").then(function (response) {
             var result = angular.fromJson(response.data);
 
             $scope.mailerTypes = result.data.MailerTypes;
@@ -98,7 +98,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope) {
         showLoader(true);
         $http({
             method: "POST",
-            url: "/order/AddOrder",
+            url: "/donhang/AddOrder",
             data: {
                 data: JSON.stringify($scope.mailer)
             }
@@ -137,7 +137,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope) {
         showLoader(true);
         $http({
             method: "POST",
-            url: "/order/CalBillPrice",
+            url: "/donhang/CalBillPrice",
             data: {
                 'weight': $scope.mailer.Weight,
                 'customerId': $scope.mailer.SenderID,

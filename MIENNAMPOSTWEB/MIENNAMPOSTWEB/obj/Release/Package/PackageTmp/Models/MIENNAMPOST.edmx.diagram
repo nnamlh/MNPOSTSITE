@@ -16,6 +16,7 @@
         <EntityTypeShape EntityType="MIENNAMPOSTModel.Article" Width="1.5" PointX="5.625" PointY="7" />
         <EntityTypeShape EntityType="MIENNAMPOSTModel.GroupArticle" Width="1.5" PointX="3.375" PointY="7.625" />
         <AssociationConnector Association="MIENNAMPOSTModel.FK__Article__GroupId__182C9B23" />
+        <EntityTypeShape EntityType="MIENNAMPOSTModel.AddressTemp" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

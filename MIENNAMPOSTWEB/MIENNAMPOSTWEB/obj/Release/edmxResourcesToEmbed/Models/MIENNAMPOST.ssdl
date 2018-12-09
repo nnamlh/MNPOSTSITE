@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="MIENNAMPOSTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AddressTemp">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="AddressInfo" Type="nvarchar(max)" />
+    <Property Name="ProvinceId" Type="nvarchar" MaxLength="128" />
+    <Property Name="DistrictId" Type="nvarchar" MaxLength="128" />
+    <Property Name="WardId" Type="nvarchar" MaxLength="128" />
+  </EntityType>
   <EntityType Name="Article">
     <Key>
       <PropertyRef Name="Id" />
@@ -155,6 +167,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="MIENNAMPOSTModelStoreContainer">
+    <EntitySet Name="AddressTemp" EntityType="Self.AddressTemp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />

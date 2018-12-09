@@ -13,11 +13,49 @@ namespace MIENNAMPOSTWEB.Controllers
     public class EditorController : Controller
     {
         [HttpPost]
+        public ActionResult UploadFile(HttpPostedFileBase upload)
+        {
+            if(upload != null)
+            {
+                string dfolder = DateTime.Now.Date.ToString("ddMMyyyy");
+                string targetFolder = "/MNFiles/" + dfolder + "/";
+                bool exists = System.IO.Directory.Exists(Server.MapPath(targetFolder));
+
+                if (!exists)
+                    System.IO.Directory.CreateDirectory(Server.MapPath(targetFolder));
+
+                string name = DateTime.Now.ToString("ddMMyyyyHHmmss") + upload.FileName;
+                string targetPath = Path.Combine(Server.MapPath(targetFolder), name);
+                upload.SaveAs(targetPath);
+
+                return Json(new
+                {
+                    uploaded = 1,
+                    fileName = name,
+                    url = targetFolder + name
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new
+            {
+                uploaded = 0,
+                fileName = "",
+                url = "",
+                message = "Lỗi"
+            }, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
+
+
+        [HttpPost]
         public ActionResult UploadImage(HttpPostedFileBase upload, string CKEditorFuncNum, string CKEditor, string langCode)
         {
             string dfolder = DateTime.Now.Date.ToString("ddMMyyyy");
             string url = "/images/" + dfolder + "/"; // url to return
-            string message; // message to display (optional)
+
             string name = "";
             if (upload != null)
             {
@@ -42,19 +80,19 @@ namespace MIENNAMPOSTWEB.Controllers
 
                 if (imageResult.Success)
                 {
-                    message = "Đả tải";
+
                     url = url + ImageName;
                     name = imageResult.ImageName;
                 }
                 else
                 {
-                    message = "";
+
                     url = "";
                 }
             }
             else
             {
-                message = "";
+
                 url = "";
             }
             //   string output = @"<html><body><script>window.parent.CKEDITOR.tools.callFunction(" + CKEditorFuncNum + ", \"" + url + "\", \"" + message + "\");</script></body></html>";

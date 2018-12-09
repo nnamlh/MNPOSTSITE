@@ -32,5 +32,6 @@ namespace MIENNAMPOSTWEB.Models
         public virtual DbSet<TokenData> TokenDatas { get; set; }
         public virtual DbSet<Article> Articles { get; set; }
         public virtual DbSet<GroupArticle> GroupArticles { get; set; }
+        public virtual DbSet<AddressTemp> AddressTemps { get; set; }
     }
 }

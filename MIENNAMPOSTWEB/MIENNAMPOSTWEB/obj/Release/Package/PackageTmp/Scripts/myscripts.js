@@ -184,8 +184,8 @@ function initeditor() {
     CKEDITOR.replace('contentEditor', {
         language: 'en',
         filebrowserImageUploadUrl: '/editor/UploadImage',
-        imageUploadUrl: '/editor/UploadImage',
-        extraPlugins: 'uploadimage'
+        uploadUrl: '/editor/UploadFile',
+        extraPlugins: 'uploadimage,uploadfile'
     });
 
 };

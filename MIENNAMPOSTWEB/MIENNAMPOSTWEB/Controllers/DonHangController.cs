@@ -39,6 +39,14 @@ namespace MIENNAMPOSTWEB.Controllers
         }
 
         [HttpGet]
+        public ActionResult FindMailer(string mailerId)
+        {
+            var res = RequestHandle.SendGet(APISource.ROOTURL + "api/mailer/FindMailer?mailerId=" + mailerId, true);
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public ActionResult GetSetting()
         {
             var res = RequestHandle.SendGet(APISource.ROOTURL + "api/basedata/GetMailerSetting", false);
@@ -61,6 +69,22 @@ namespace MIENNAMPOSTWEB.Controllers
 
         [HttpPost]
         public ActionResult AddOrder(string data)
+        {
+            var res = RequestHandle.SendPost(APISource.ROOTURL + "api/mailer/AddMailer", data, true);
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpGet]
+        public ActionResult ChiTiet(string id = "")
+        {
+            ViewBag.MailerId = id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult HuyDon(string data)
         {
             var res = RequestHandle.SendPost(APISource.ROOTURL + "api/mailer/AddMailer", data, true);
 
