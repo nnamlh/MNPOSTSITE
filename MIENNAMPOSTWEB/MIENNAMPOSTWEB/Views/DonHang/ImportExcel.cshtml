@@ -1,0 +1,273 @@
+﻿
+@{
+    ViewBag.Title = "ImportExcel";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Tạo đơn hàng từ Excel</h2> <a href="~/Template/mailer.template.xlsx" target="_blank">Tải file mẫu</a>
+                    <div class="clearfix"></div>
+
+                </div>
+                <!-- end x_title-->
+                <div class="x_content">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Upload file Excel</label>
+                                <input type="file" id="insertByExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="table-responsive">
+                                <table class="table jambo_table bulk_action ">
+                                    <thead>
+                                        <tr class="headings">
+                                            <th>STT</th>
+                                            <th>Người nhận</th>
+                                            <th>SDT</th>
+                                            <th>Địa chỉ</th>
+                                            <th>TL (GRAM)</th>
+                                            <th>CoD</th>
+                                            <th>Tổng cước</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr ng-repeat="item in listMailers">
+                                            <td>{{$index + 1}}&nbsp;&nbsp;<a href="#" ng-click="edit($index)">Xem</a></td>
+                                            <td>{{item.RecieverName}}</td>
+                                            <td>{{item.RecieverPhone}}</td>
+                                            <td>{{item.RecieverAddress}}</td>
+                                            <td>{{item.Weight}}</td>
+                                            <td>
+                                                {{item.COD}} <br />
+                                                {{item.COD | currency: 'VND ':0}}
+                                            </td>
+                                            <td>
+                                                {{item.Amount}} <br />
+                                                {{item.Amount | currency: 'VND ':0}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                            <button type="button" class="btn btn-primary" ng-click="sendCreate()">Gửi tạo</button>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end x_content-->
+            </div>
+            <!-- end x_pannel-->
+
+        </div>
+
+
+    </div>
+    <!-- Modal -->
+    <div id="showInfo" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>{{msg}}</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-default" href="/user/show">Tới trang cập nhật</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="editmailer" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form ng-submit="updateMailer()">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4><i class="fa fa-align-left"></i> Thông tin nhận hàng</h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Tên người nhận</label>
+                                    <input type="text" class="form-control" ng-model="mailer.RecieverName" required />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Điện thoại nhận</label>
+                                    <input type="tel" class="form-control" ng-model="mailer.RecieverPhone" required />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Địa chỉ nhận</label>
+                                    <input type="text" class="form-control" ng-model="mailer.RecieverAddress" id="autocompleteRecei" required />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label>Tỉnh thành nhận</label>
+                                    <select ui-select2 class="form-control" ng-model="mailer.RecieverProvinceID" ng-change="provinceChange('d')" required>
+                                        <option ng-repeat="item in provinces" value="{{item.code}}">{{item.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Quận huyện nhận</label>
+                                    <select ui-select2 class="form-control" ng-model="mailer.RecieverDistrictID" ng-change="provinceChange('w')" required>
+                                        <option ng-repeat="item in districts" value="{{item.code}}">{{item.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phường xã nhận</label>
+                                    <select ui-select2 class="form-control" ng-model="mailer.RecieverWardID" required>
+                                        <option ng-repeat="item in wards" value="{{item.code}}">{{item.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <h4><i class="fa fa-align-left"></i> Thông tin hàng gửi</h4>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Nội dung hàng</label>
+                                    <input type="text" class="form-control" ng-model="mailer.MailerDescription" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Ghi chú</label>
+                                    <input type="text" class="form-control" ng-model="mailer.Notes" />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Dịch vụ</label>
+                                    <select ng-model="mailer.MailerTypeID" class="form-control" required>
+                                        <option ng-repeat="item in mailerTypes" value="{{item.code}}">{{item.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Hình thức thanh toán</label>
+                                    <select ng-model="mailer.PaymentMethodID" class="form-control" required>
+                                        <option ng-repeat="item in payments" value="{{item.code}}">{{item.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Tiền thu (CoD) {{mailer.COD |  currency: 'VND ':0}}</label>
+                                    <input type="number" class="form-control" ng-model="mailer.COD" step="any" ng-change="setMerchandiseValue()" />
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Giá trị hàng hóa {{mailer.MerchandiseValue |  currency: 'VND ':0}}</label>
+                                    <input type="number" class="form-control" ng-model="mailer.MerchandiseValue" step="any" />
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label>Kích thước (cm) (dài - rộng - cao)</label>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <input type="number" class="form-control" placeholder="Dài" ng-model="mailer.LengthSize" step="any" />
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="number" class="form-control" placeholder="Rộng" ng-model="mailer.WidthSize" step="any" />
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="number" class="form-control" placeholder="Cao" ng-model="mailer.HeightSize" step="any" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Hàng hóa</label>
+                                                <select ng-model="mailer.MerchandiseID" class="form-control">
+                                                    <option ng-repeat="merchandise in merchandises" value="{{merchandise.code}}">{{merchandise.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Số lượng</label>
+                                                <input type="number" ng-model="mailer.Quantity" class="form-control" placeholder="Số lượng" required step="any" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Trọng lượng (Gram)</label>
+                                                <input type="number" class="form-control" ng-model="mailer.Weight" placeholder="Trọng lượng" required step="any" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-xs-12">
+                                <h4><i class="fa fa-align-left"></i>Thành tiền</h4>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Cước chính</label>
+                                    <input type="number" class="form-control" step="any" ng-model="mailer.PriceDefault" ng-change="changePrice()" />
+                                    {{mailer.PriceDefault |  currency: 'VND ':0}}
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Cước CoD</label>
+                                    <input type="number" class="form-control" step="any" ng-model="mailer.PriceCoD" ng-change="changePrice()" />
+                                    {{mailer.PriceCoD |  currency: 'VND ':0}}
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Tổng cước</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" step="any" ng-model="mailer.Amount" />
+                                        <span class="input-group-addon"><a href="#" ng-click="calPrice()"><i my-tool-tip="Tính giá" class="fa fa-calculator"></i></a></span>
+                                    </div>
+                                    {{mailer.PriceDefault |  currency: 'VND ':0}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Hoàn thành</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+@section scripts {
+    <script src="~/Scripts/orderexcel.js"></script>
+}

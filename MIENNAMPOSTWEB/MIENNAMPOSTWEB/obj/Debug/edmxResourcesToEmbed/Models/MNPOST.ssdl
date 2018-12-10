@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MNPOSTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BS_Customers">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CustomerCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="CustomerName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CustomerGroupID" Type="varchar" MaxLength="128" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="DistrictID" Type="varchar" MaxLength="15" />
+    <Property Name="ProvinceID" Type="varchar" MaxLength="15" />
+    <Property Name="CountryID" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="PostOfficeID" Type="varchar" MaxLength="15" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="WardID" Type="nvarchar" MaxLength="128" />
+    <Property Name="UserLogin" Type="nvarchar" MaxLength="128" />
+    <Property Name="Deputy" Type="nvarchar(max)" />
+    <Property Name="ClientUser" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="BS_Districts">
+    <Key>
+      <PropertyRef Name="DistrictID" />
+    </Key>
+    <Property Name="DistrictID" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="DistrictName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProvinceID" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="DistrictValue" Type="nvarchar" MaxLength="128" />
+    <Property Name="DistrictCode" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="BS_Provinces">
+    <Key>
+      <PropertyRef Name="ProvinceID" />
+    </Key>
+    <Property Name="ProvinceID" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProvinceName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CountryID" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ZoneID" Type="nvarchar" MaxLength="10" />
+    <Property Name="ProvinceCode" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="BS_Services">
+    <Key>
+      <PropertyRef Name="ServiceID" />
+    </Key>
+    <Property Name="ServiceID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ServiceName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Price" Type="money" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="BS_ServiceTypes">
+    <Key>
+      <PropertyRef Name="ServiceID" />
+    </Key>
+    <Property Name="ServiceID" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="ServiceName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar" MaxLength="1" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="BS_Wards">
+    <Key>
+      <PropertyRef Name="WardID" />
+    </Key>
+    <Property Name="WardID" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="WardName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DistrictID" Type="varchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="128" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="CType" Type="nvarchar" MaxLength="128" />
+    <Property Name="CNotes" Type="nvarchar(max)" />
+    <Property Name="Active" Type="int" />
+  </EntityType>
+  <Function Name="CalPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Weight" Type="float" Mode="In" />
+    <Parameter Name="CustomerID" Type="nvarchar" Mode="In" />
+    <Parameter Name="ProvinceID" Type="nvarchar" Mode="In" />
+    <Parameter Name="ServiceTypeID" Type="nvarchar" Mode="In" />
+    <Parameter Name="PostOfficeID" Type="nvarchar" Mode="In" />
+    <Parameter Name="Ngay" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="MNPOSTModelStoreContainer">
+    <EntitySet Name="BS_Customers" EntityType="Self.BS_Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BS_Districts" EntityType="Self.BS_Districts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BS_Provinces" EntityType="Self.BS_Provinces" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BS_Services" EntityType="Self.BS_Services" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BS_ServiceTypes" EntityType="Self.BS_ServiceTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BS_Wards" EntityType="Self.BS_Wards" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CData" EntityType="Self.CData" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

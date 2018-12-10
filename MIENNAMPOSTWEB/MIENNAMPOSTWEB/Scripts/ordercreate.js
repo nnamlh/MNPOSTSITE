@@ -141,13 +141,14 @@ app.controller('myCtrl', function ($scope, $http, $rootScope) {
             data: {
                 'weight': $scope.mailer.Weight,
                 'customerId': $scope.mailer.SenderID,
-                'provinceId': $scope.mailer.SenderProvinceID,
+                'provinceId': $scope.mailer.RecieverProvinceID,
                 'serviceTypeId': $scope.mailer.MailerTypeID
             }
         }).then(function mySuccess(response) {
             showLoader(false);
-            $scope.mailer.PriceDefault = response.data.price;
-            $scope.mailer.PriceCoD = response.data.codPrice;
+            var result = angular.fromJson(response.data);
+            $scope.mailer.PriceDefault = result.data.price;
+            $scope.mailer.PriceCoD = result.data.codPrice;
 
             $scope.mailer.Amount = $scope.mailer.PriceDefault + $scope.mailer.PriceCoD + $scope.mailer.PriceService;
 
