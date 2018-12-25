@@ -927,6 +927,8 @@
     <Content Include="Scripts\ordershow.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\showcod.js" />
+    <Content Include="Scripts\showdebit.js" />
     <Content Include="Scripts\tracks.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-2.5.0.min.js" />
     <Content Include="Scripts\uploader.min.js" />
@@ -982,6 +984,8 @@
     <Content Include="Views\DonHang\ChiTiet.cshtml" />
     <Content Include="Views\DonHang\ImportExcel.cshtml" />
     <Content Include="Template\mailer.template.xlsx" />
+    <Content Include="Views\DonHang\CoD.cshtml" />
+    <Content Include="Views\DonHang\Debit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

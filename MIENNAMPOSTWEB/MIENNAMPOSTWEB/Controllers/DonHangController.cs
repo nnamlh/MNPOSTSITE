@@ -387,5 +387,78 @@ namespace MIENNAMPOSTWEB.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
         }
 
+
+        // tien COD
+        public ActionResult CoD()
+        {
+            var findUSer = db.AspNetUsers.Where(p => p.UserName == User.Identity.Name).FirstOrDefault();
+
+            ViewBag.InfoID = findUSer.IDClient;
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ReportCoD()
+        {
+            var findUSer = db.AspNetUsers.Where(p => p.UserName == User.Identity.Name).FirstOrDefault();
+
+            var res = RequestHandle.SendGet(APISource.ROOTURL + "api/mailer/ReportCusCoD?cusId=" + findUSer.IDClient, true);
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult GetCoDBill(string data)
+        {
+            var res = RequestHandle.SendPost(APISource.ROOTURL + "api/mailer/CoDBill",data, true);
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetCoDBillDetail(string documentId)
+        {
+            var res = RequestHandle.SendGet(APISource.ROOTURL + "api/mailer/GetCoDBillDetail?documentId=" + documentId, true);
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+
+        // debit
+        [HttpGet]
+        public ActionResult Debit()
+        {
+            var findUSer = db.AspNetUsers.Where(p => p.UserName == User.Identity.Name).FirstOrDefault();
+
+            ViewBag.InfoID = findUSer.IDClient;
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult GetDebitNoPaid()
+        {
+            var findUSer = db.AspNetUsers.Where(p => p.UserName == User.Identity.Name).FirstOrDefault();
+            var res = RequestHandle.SendGet(APISource.ROOTURL + "api/mailer/CustomerDebitNoPaid?cusId=" + findUSer.IDClient, true);
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult FindDebit(int month, int year)
+        {
+            var findUSer = db.AspNetUsers.Where(p => p.UserName == User.Identity.Name).FirstOrDefault();
+            var res = RequestHandle.SendGet(APISource.ROOTURL + "api/mailer/CustomerDebitFindByMonth?cusId=" + findUSer.IDClient + "&month=" + month + "&year=" + year, true);
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult DebitDetail(string documentId)
+        {
+            var res = RequestHandle.SendGet(APISource.ROOTURL + "api/mailer/CustomerDebitDetail?documentid=" + documentId, true);
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -25,8 +25,6 @@
                         <div class="bs-docs-section">
                             <h4 class="page-header" ng-show="checkShow()">Thông tin vận đơn <a class="label label-primary" ng-click="showPDF('http://noibo.miennampost.vn/report/Index?mailerId=' + mailer.MailerID)">In phiếu</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" ng-click="cancelOrder()">Hủy đơn</a></h4>
                             <div class="row">
-
-
                                 <div class="col-sm-2">
                                     <div class="x_title">
                                         <h2><i class="fa fa-align-left"></i> Thông tin gửi</h2>
@@ -163,6 +161,12 @@
                                                 <p>{{mailer.DeliveryNotes}}</p>
                                             </div>
                                         </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group" ng-show="mailer.COD > 0">
+                                                <label>Thanh toán CoD</label>
+                                                <p>{{statuCoD[mailer.PaidCoD].name}}</p>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -274,6 +278,21 @@
 
             $scope.showPrint = false;
 
+            $scope.statuCoD = [
+                {
+                    "code": 0,
+                    "name": "LẬP PHIẾU THANH TOÁN"
+                },
+                {
+                    "code": 1,
+                    "name": "LẬP PHIẾU THANH TOÁN"
+                },
+                {
+                    "code": 2,
+                    "name": "ĐÃ THANH TOÁN"
+                }
+            ];
+
             $scope.status = angular.copy(mailerStatusData);
             $scope.mailerId = '@ViewBag.MailerId';
             $scope.findMailer = function () {
@@ -290,6 +309,7 @@
 
                         showNotify("Không tìm thấy");
                     } else {
+                        console.log(result.data);
                         $scope.showPrint = true;
                         $scope.mailer = result.data.mailer;
                         $scope.tracks = result.data.tracks;

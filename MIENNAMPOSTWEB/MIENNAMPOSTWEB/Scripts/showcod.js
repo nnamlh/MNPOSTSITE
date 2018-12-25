@@ -1,16 +1,20 @@
-﻿var app = angular.module('myApp', ['ui.bootstrap', 'myDirective', 'myKeyPress', 'ui.select2', 'ui.mask']);
+﻿var app = angular.module('myApp', ['ui.bootstrap', 'ui.mask', 'myDirective']);
 
-app.controller('myCtrl', function ($scope, $http, $rootScope) {
 
+app.controller('myCtrl', function ($scope, $http) {
+    // phan trang
     $scope.numPages;
     $scope.itemPerPage;
     $scope.totalItems;
     $scope.currentPage = 1;
     $scope.maxSize = 5;
-    $scope.statuCoD = [
+    $scope.documents = [];
+    $scope.document = {};
+    $scope.details = [];
+    $scope.status = [
         {
             "code": 0,
-            "name": "LẬP PHIẾU THANH TOÁN"
+            "name": "CHƯA THANH TOÁN"
         },
         {
             "code": 1,
@@ -21,15 +25,17 @@ app.controller('myCtrl', function ($scope, $http, $rootScope) {
             "name": "ĐÃ THANH TOÁN"
         }
     ];
-    $scope.status = [{ "code": 0, "name": "KHỞI TẠO" }, { "code": 1, "name": "ĐANG GỬI LIÊN TUYÊN" }, { "code": 2, "name": "ĐÃ NHẬN" }, { "code": 3, "name": "ĐANG PHÁT" }, { "code": 4, "name": "ĐÃ PHÁT" }, { "code": 5, "name": "CHUYỂN HOÀN" }, { "code": 6, "name": "CHƯA PHÁT ĐƯỢC" }, { "code": 7, "name": "ĐANG ĐI LẤY HÀNG" }, { "code": 8, "name": "ĐÃ LẤY HÀNG" }, { "code": 9, "name": "GIAO ĐỐI TÁC PHÁT" }, { "code": 10, "name": "HỦY ĐƠN" }];
-    $scope.status.unshift({ "code": -1, "name": "TẤT CẢ" });
-    $scope.findStatus = function (code) {
-        for (var i = 0; i < $scope.status.length; i++) {
-            if ($scope.status[i].code === code)
-                return $scope.status[i].name;
-        }
 
-    };
+    $scope.ECoDStatus = [
+        {
+            "code": 0,
+            "name": "CHƯA THU"
+        },
+        {
+            "code": 1,
+            "name": "ĐÃ THU"
+        }
+    ];
 
 
     $scope.pageChanged = function () {
@@ -37,22 +43,19 @@ app.controller('myCtrl', function ($scope, $http, $rootScope) {
     };
 
     $scope.searchInfo = {
-        "search": "",
         "customerId": info,
         "fromDate": fromDate,
         "toDate": toDate,
-        "status": -1,
         "page": $scope.currentPage
     };
 
-    $scope.mailers = [];
     $scope.GetData = function () {
         $scope.searchInfo.page = $scope.currentPage;
 
         showLoader(true);
         $http({
             method: "POST",
-            url: "/donhang/GetData",
+            url: "/donhang/GetCoDBill",
             data: {
                 data: JSON.stringify($scope.searchInfo)
             }
@@ -65,7 +68,7 @@ app.controller('myCtrl', function ($scope, $http, $rootScope) {
                 $scope.totalItems = result.toltalSize;
                 $scope.numPages = Math.round($scope.totalItems / $scope.itemPerPage);
 
-                $scope.mailers = result.data;
+                $scope.documents = result.data;
 
             } else {
                 alert(result.msg);
@@ -75,12 +78,33 @@ app.controller('myCtrl', function ($scope, $http, $rootScope) {
             showLoader(false);
             alert('Connect error');
         });
-    }
+    };
     $scope.GetData();
-    $scope.checkAll = function () {
-        for (var i = 0; i < $scope.mailers.length; i++) {
-            $scope.mailers[i].isCheck = $scope.checkMailers;
-        }
+
+
+    $scope.reportCoD = function () {
+        $http.get('/donhang/ReportCoD').then(function (response) {
+
+            var result = angular.fromJson(response.data);
+
+            $scope.countMailer = result.data.countMailer;
+            $scope.sumCoD = result.data.sumCoD;
+
+        });
+    };
+
+    $scope.reportCoD();
+
+
+    $scope.showDetails = function (idx) {
+        $scope.document = angular.copy($scope.documents[idx]);
+        showLoader(true);
+        $http.get("/donhang/GetCoDBillDetail?documentId=" + $scope.document.DocumentID).then(function (response) {
+            $('.nav-tabs a[href="#tab_chitiet"]').tab('show');
+            showLoader(false);
+            var result = angular.fromJson(response.data);
+            $scope.details = angular.copy(result.data);
+        });
     };
 
 

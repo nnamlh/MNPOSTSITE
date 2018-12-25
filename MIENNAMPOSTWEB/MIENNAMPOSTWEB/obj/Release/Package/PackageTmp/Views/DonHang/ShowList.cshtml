@@ -58,7 +58,6 @@
                                 <table class="table table-bordered table-striped table-condensed">
                                     <thead>
                                         <tr class="headings">
-                                            <th><input type="checkbox" ng-model="checkMailers" ng-change="checkAll()" /></th>
                                             <th>STT</th>
                                             <th>Vận đơn</th>
                                             <th>TT gửi</th>
@@ -70,7 +69,6 @@
 
                                     <tbody>
                                         <tr ng-repeat="item in mailers">
-                                            <td><input type="checkbox" ng-model="item.isCheck" /></td>
                                             <td>
                                                 {{$index + 1}}
                                             </td>

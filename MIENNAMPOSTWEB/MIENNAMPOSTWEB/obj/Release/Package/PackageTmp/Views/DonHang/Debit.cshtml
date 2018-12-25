@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "Debit";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<div ng-app="myApp" ng-controller="myCtrl">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Thông tin công nợ</h2>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                        <ul class="nav nav-tabs bar_tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#tab_phieuthu" role="tab" data-toggle="tab" aria-expanded="false" ng-click="tabcreate = false">Công nợ</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#tab_chitiet" role="tab" data-toggle="tab" aria-expanded="false" ng-click="tabcreate = false">Chi tiết</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active in" id="tab_phieuthu" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped jambo_table bulk_action">
+                                                <thead>
+                                                    <tr class="headings">
+                                                        <th>STT</th>
+                                                        <th>Tháng</th>
+                                                        <th>Số tiền</th>
+                                                        <th>Tổng đơn</th>
+                                                        <th>Mô tả</th>
+                                                        <th>Tình trạng</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr ng-repeat="item in documents">
+                                                        <td>{{$index + 1}}&nbsp;<a href="#" ng-click="showDetail($index)">chi tiết</a></td>
+                                                        <td>{{item.DebtMonth}}</td>
+                                                        <td>{{item.TotalAmount | currency: 'VND'}}</td>
+                                                        <td>{{item.AllMailer}}</td>
+                                                        <td>{{item.Description}}</td>
+                                                        <td>{{status[item.StatusID].name}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane fade" id="tab_chitiet" aria-labelledby="profile-tab">
+                                <form name="formSearch" ng-submit="GetDocument()">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Thời gian (Tháng - Năm)</label>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <input type="text" required class="form-control" ng-model="document.DMonthn">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <input type="text" required class="form-control" ng-model="document.DYear">
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <button class="btn btn-primary" type="submit">Xem thông tin</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Số tiền</label>
+                                            <input type="text" class="form-control" value="{{document.TotalAmount | currency: 'VND'}}/{{document.AllMailer}}&nbsp; đơn" disabled />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Ghi chú</label>
+                                            <input type="text" class="form-control" value="{{document.Description}}" disabled />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Tình trạng</label>
+                                            <input type="text" class="form-control" value="{{status[document.StatusID].name}}" disabled />
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped jambo_table bulk_action">
+                                        <thead>
+                                            <tr class="headings">
+                                                <th>STT</th>
+                                                <th>Mã VĐ</th>
+                                                <th>COD</th>
+                                                <th>Dịch vụ</th>
+                                                <th>TL</th>
+                                                <th>Cước</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr ng-repeat="item in details"> 
+                                                <td>{{$index + 1}}</td>
+                                                <td>{{item.MailerID}}&nbsp;<a href="/donhang/chitiet/{{item.MailerID}}" target="_blank">xem</a></td>
+                                                <td>{{item.COD | currency:'VND'}}</td>
+                                                <td>{{item.MailerTypeID}}</td>
+                                                <td>{{item.Weight}} GRAM</td>
+                                                <td>{{item.Amount | currency:'VND'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+@section scripts {
+
+    <script type="text/javascript">
+          var info = '@ViewBag.InfoID';
+        var currentDate = '@DateTime.Now.ToString("dd/MM/yyyy")';
+    </script>
+
+    <script src="~/Scripts/showdebit.js"></script>
+}
+

@@ -143,7 +143,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/05/2012 11:08:46</publishTime>
     </File>
     <File Include="bin/MIENNAMPOSTWEB.dll">
-      <publishTime>12/11/2018 05:19:43</publishTime>
+      <publishTime>12/11/2018 19:24:03</publishTime>
     </File>
     <File Include="bin/MimeKit.dll">
       <publishTime>12/01/2018 13:51:08</publishTime>
@@ -1952,13 +1952,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/11/2018 05:17:02</publishTime>
     </File>
     <File Include="Scripts/ordershow.js">
-      <publishTime>12/02/2018 19:25:26</publishTime>
+      <publishTime>12/11/2018 17:08:54</publishTime>
     </File>
     <File Include="Scripts/respond.js">
       <publishTime>11/30/2018 16:29:11</publishTime>
     </File>
     <File Include="Scripts/respond.min.js">
       <publishTime>11/30/2018 16:29:11</publishTime>
+    </File>
+    <File Include="Scripts/showcod.js">
+      <publishTime>12/11/2018 17:09:43</publishTime>
+    </File>
+    <File Include="Scripts/showdebit.js">
+      <publishTime>12/11/2018 19:23:10</publishTime>
     </File>
     <File Include="Scripts/tracks.js">
       <publishTime>12/01/2018 20:32:16</publishTime>
@@ -2021,16 +2027,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/01/2018 05:50:13</publishTime>
     </File>
     <File Include="Views/DonHang/ChiTiet.cshtml">
-      <publishTime>12/02/2018 19:35:20</publishTime>
+      <publishTime>12/11/2018 17:20:53</publishTime>
+    </File>
+    <File Include="Views/DonHang/CoD.cshtml">
+      <publishTime>12/11/2018 19:18:46</publishTime>
     </File>
     <File Include="Views/DonHang/Create.cshtml">
       <publishTime>12/01/2018 03:33:24</publishTime>
+    </File>
+    <File Include="Views/DonHang/Debit.cshtml">
+      <publishTime>12/11/2018 19:18:56</publishTime>
     </File>
     <File Include="Views/DonHang/ImportExcel.cshtml">
       <publishTime>12/11/2018 05:06:32</publishTime>
     </File>
     <File Include="Views/DonHang/ShowList.cshtml">
-      <publishTime>12/02/2018 19:24:53</publishTime>
+      <publishTime>12/11/2018 17:05:02</publishTime>
     </File>
     <File Include="Views/Error/Index.cshtml">
       <publishTime>12/01/2018 05:42:53</publishTime>
