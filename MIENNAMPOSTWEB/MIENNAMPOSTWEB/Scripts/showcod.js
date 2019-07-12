@@ -11,6 +11,9 @@ app.controller('myCtrl', function ($scope, $http) {
     $scope.documents = [];
     $scope.document = {};
     $scope.details = [];
+    $scope.sumCODDangPhat = 0;
+    $scope.sumCODChuyenHoan = 0;
+    $scope.sumCoD = 0;
     $scope.status = [
         {
             "code": 0,
@@ -87,7 +90,8 @@ app.controller('myCtrl', function ($scope, $http) {
 
             var result = angular.fromJson(response.data);
 
-            $scope.countMailer = result.data.countMailer;
+            $scope.sumCODDangPhat = result.data.sumCODDangPhat;
+            $scope.sumCODChuyenHoan = result.data.sumCODChuyenHoan;
             $scope.sumCoD = result.data.sumCoD;
 
         });

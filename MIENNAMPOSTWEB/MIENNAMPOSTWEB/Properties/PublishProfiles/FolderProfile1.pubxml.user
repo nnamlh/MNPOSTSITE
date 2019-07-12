@@ -143,7 +143,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2019 15:38:36</publishTime>
     </File>
     <File Include="bin/MIENNAMPOSTWEB.dll">
-      <publishTime>05/03/2019 15:49:50</publishTime>
+      <publishTime>07/12/2019 14:10:51</publishTime>
     </File>
     <File Include="bin/MimeKit.dll">
       <publishTime>05/03/2019 15:38:37</publishTime>
@@ -1946,7 +1946,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2019 15:38:34</publishTime>
     </File>
     <File Include="Scripts/ordercreate.js">
-      <publishTime>05/03/2019 15:38:34</publishTime>
+      <publishTime>07/12/2019 14:05:34</publishTime>
     </File>
     <File Include="Scripts/orderexcel.js">
       <publishTime>05/03/2019 15:38:34</publishTime>
@@ -1961,7 +1961,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2019 15:38:34</publishTime>
     </File>
     <File Include="Scripts/showcod.js">
-      <publishTime>05/03/2019 15:38:45</publishTime>
+      <publishTime>07/12/2019 12:19:31</publishTime>
     </File>
     <File Include="Scripts/showdebit.js">
       <publishTime>05/03/2019 15:38:45</publishTime>
@@ -2030,7 +2030,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2019 15:38:45</publishTime>
     </File>
     <File Include="Views/DonHang/CoD.cshtml">
-      <publishTime>05/03/2019 15:38:45</publishTime>
+      <publishTime>07/12/2019 12:16:52</publishTime>
     </File>
     <File Include="Views/DonHang/Create.cshtml">
       <publishTime>05/03/2019 15:38:34</publishTime>

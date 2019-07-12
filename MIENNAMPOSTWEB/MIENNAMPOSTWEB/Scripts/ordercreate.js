@@ -142,15 +142,17 @@ app.controller('myCtrl', function ($scope, $http, $rootScope) {
                 'weight': $scope.mailer.Weight,
                 'customerId': $scope.mailer.SenderID,
                 'provinceId': $scope.mailer.RecieverProvinceID,
-                'serviceTypeId': $scope.mailer.MailerTypeID
+                'serviceTypeId': $scope.mailer.MailerTypeID,
+                'districtId': $scope.mailer.RecieverDistrictID,
+                'cod': $scope.mailer.COD
             }
         }).then(function mySuccess(response) {
             showLoader(false);
             var result = angular.fromJson(response.data);
             $scope.mailer.PriceDefault = result.data.price;
-            $scope.mailer.PriceCoD = result.data.codPrice;
+            $scope.mailer.PriceService = result.data.priceService;
 
-            $scope.mailer.Amount = $scope.mailer.PriceDefault + $scope.mailer.PriceCoD + $scope.mailer.PriceService;
+            $scope.mailer.Amount = $scope.mailer.PriceDefault + $scope.mailer.PriceService;
 
         }, function myError(response) {
             showLoader(false);

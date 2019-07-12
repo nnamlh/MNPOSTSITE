@@ -60,10 +60,10 @@ namespace MIENNAMPOSTWEB.Controllers
 
 
         [HttpPost]
-        public ActionResult CalBillPrice(float weight = 0, string customerId = "", string provinceId = "", string serviceTypeId = "")
+        public ActionResult CalBillPrice(float weight = 0, string customerId = "", string provinceId = "", string serviceTypeId = "", float cod = 0, string districtId = "")
         {
 
-            var url = APISource.ROOTURL + "api/basedata/CalBillPrice?weight=" + weight + "&customerId=" + customerId + "&provinceId=" + provinceId + "&serviceTypeId=" + serviceTypeId;
+            var url = APISource.ROOTURL + "api/basedata/CalBillPrice?weight=" + weight + "&customerId=" + customerId + "&provinceId=" + provinceId + "&serviceTypeId=" + serviceTypeId + "&districtId=" + districtId + " &cod=" + cod;
 
             var res = RequestHandle.SendGet(url, false);
 
