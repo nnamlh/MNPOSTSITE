@@ -89,7 +89,7 @@ app.controller('myCtrl', function ($scope, $http) {
         $http.get('/donhang/ReportCoD').then(function (response) {
 
             var result = angular.fromJson(response.data);
-
+            console.log(result);
             $scope.sumCODDangPhat = result.data.sumCODDangPhat;
             $scope.sumCODChuyenHoan = result.data.sumCODChuyenHoan;
             $scope.sumCoD = result.data.sumCoD;

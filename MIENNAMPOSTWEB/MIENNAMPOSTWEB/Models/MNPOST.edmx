@@ -36,6 +36,7 @@
           <Property Name="ProvinceID" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="DistrictValue" Type="nvarchar" MaxLength="128" />
           <Property Name="DistrictCode" Type="nvarchar" MaxLength="128" />
+          <Property Name="VSVS" Type="bit" />
         </EntityType>
         <EntityType Name="BS_Provinces">
           <Key>
@@ -55,6 +56,7 @@
           <Property Name="ServiceName" Type="nvarchar" MaxLength="50" />
           <Property Name="Price" Type="money" />
           <Property Name="IsActive" Type="bit" />
+          <Property Name="IsPercent" Type="bit" />
         </EntityType>
         <EntityType Name="BS_ServiceTypes">
           <Key>
@@ -92,6 +94,16 @@
           <Parameter Name="PostOfficeID" Type="nvarchar" Mode="In" />
           <Parameter Name="Ngay" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="CalPriceCOD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Weight" Type="float" Mode="In" />
+          <Parameter Name="CustomerID" Type="nvarchar" Mode="In" />
+          <Parameter Name="ProvinceID" Type="nvarchar" Mode="In" />
+          <Parameter Name="ServiceTypeID" Type="nvarchar" Mode="In" />
+          <Parameter Name="PostOfficeID" Type="nvarchar" Mode="In" />
+          <Parameter Name="Ngay" Type="nvarchar" Mode="In" />
+          <Parameter Name="District" Type="int" Mode="In" />
+          <Parameter Name="GroupTypeID" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="MNPOSTModelStoreContainer">
           <EntitySet Name="BS_Customers" EntityType="Self.BS_Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BS_Districts" EntityType="Self.BS_Districts" Schema="dbo" store:Type="Tables" />
@@ -114,6 +126,7 @@
           <Property Name="ProvinceID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DistrictValue" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="DistrictCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="VSVS" Type="Boolean" />
         </EntityType>
         <EntityType Name="BS_Provinces">
           <Key>
@@ -133,6 +146,7 @@
           <Property Name="ServiceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsPercent" Type="Boolean" />
         </EntityType>
         <EntityType Name="BS_ServiceTypes">
           <Key>
@@ -178,6 +192,16 @@
             <Parameter Name="Ngay" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="BS_Customers" EntityType="MNPOSTModel.BS_Customers" />
+          <FunctionImport Name="CalPriceCOD" ReturnType="Collection(Decimal)">
+            <Parameter Name="Weight" Mode="In" Type="Double" />
+            <Parameter Name="CustomerID" Mode="In" Type="String" />
+            <Parameter Name="ProvinceID" Mode="In" Type="String" />
+            <Parameter Name="ServiceTypeID" Mode="In" Type="String" />
+            <Parameter Name="PostOfficeID" Mode="In" Type="String" />
+            <Parameter Name="Ngay" Mode="In" Type="String" />
+            <Parameter Name="District" Mode="In" Type="Int32" />
+            <Parameter Name="GroupTypeID" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="BS_Customers">
           <Key>
@@ -210,6 +234,7 @@
           <EntitySetMapping Name="BS_Districts">
             <EntityTypeMapping TypeName="MNPOSTModel.BS_Districts">
               <MappingFragment StoreEntitySet="BS_Districts">
+                <ScalarProperty Name="VSVS" ColumnName="VSVS" />
                 <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
                 <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
                 <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
@@ -232,6 +257,7 @@
           <EntitySetMapping Name="BS_Services">
             <EntityTypeMapping TypeName="MNPOSTModel.BS_Services">
               <MappingFragment StoreEntitySet="BS_Services">
+                <ScalarProperty Name="IsPercent" ColumnName="IsPercent" />
                 <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
                 <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
@@ -294,6 +320,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CalPriceCOD" FunctionName="MNPOSTModel.Store.CalPriceCOD" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

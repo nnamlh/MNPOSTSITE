@@ -99,7 +99,7 @@ namespace MIENNAMPOSTWEB.Controllers
             article.Id = Guid.NewGuid().ToString();
             article.Thumbnail = urlUpLoad(image);
             article.CreateDate = DateTime.Now;
-            
+            article.Content = contentEditor;
 
             db.Articles.Add(article);
 

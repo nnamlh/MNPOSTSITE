@@ -7,17 +7,20 @@
 <div ng-app="myApp" ng-controller="myCtrl">
     <!-- top tiles -->
     <div class="row tile_count">
-        <div class="col-sm-3 col-xs-6 tile_stats_count">
+        <div class="col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Số tiền COD</span>
-            <div class="count">{{ sumCoD | currency:'đ'}}&nbsp;đơn</div>
+            <div class="count">{{ sumCoD}}</div>
+            <a ng-click="showMailerDetails(1)" style="font-size: 18px; font-weight: bold; color:cornflowerblue">Chi tiết</a>
         </div>
-        <div class="col-sm-3 col-xs-6 tile_stats_count">
+        <div class="col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Số COD đang phát</span>
-            <div class="count">{{sumCODDangPhat | currency:'VND'}}</div>
+            <div class="count">{{ sumCODDangPhat}}</div>
+            <a ng-click="showMailerDetails(2)" style="font-size: 18px; font-weight: bold; color:cornflowerblue">Chi tiết</a>
         </div>
-        <div class="col-sm-3 col-xs-6 tile_stats_count">
+        <div class="col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Số COD chuyển hoàn</span>
-            <div class="count">{{sumCODChuyenHoan | currency:'VND'}}</div>
+            <div class="count">{{ sumCODChuyenHoan}}</div>
+            <a ng-click="showMailerDetails(3)" style="font-size: 18px; font-weight: bold; color:cornflowerblue">Chi tiết</a>
         </div>
     </div>
     <!-- /top tiles -->
@@ -153,6 +156,50 @@
         </div>
 
     </div>
+
+
+    <!-- Large modal -->
+    <div class="modal fade bs-example-modal-lg" id="mailersModal" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Danh sách đơn</h4>
+                </div>
+                <div class="modal-body">
+                    <h3 ng-show="listMailerData.length == 0">Không có đơn nào</h3>
+                    <table class="table" >
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Vận Đơn</th>
+                                <th>Người gửi</th>
+                                <th>Địa chỉ</th>
+                                <th>Ví trí hiện tại</th>
+                                <th>Tra cứu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in listMailerData">
+                                <td>{{$index  + 1}}</td>
+                                <td>{{item.MailerID}}</td>
+                                <td>{{item.RecieverName}}</td>
+                                <td>{{item.RecieverAddress}}</td>
+                                <td><a href="/donhang/chitiet/{{item.MailerID}}">xem</a></td>
+                            </tr>
+                           
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>
 
 

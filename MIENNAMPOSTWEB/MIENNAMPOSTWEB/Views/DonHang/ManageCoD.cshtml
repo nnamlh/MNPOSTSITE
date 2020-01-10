@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewBag.Title = "ManageCoD";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div ng-app="myApp" ng-controller="myCtrl">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Quản lý tiền hàng</h2>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <nav class="navbar navbar-findcond">
+                        <div class="collapse navbar-collapse" id="navbar">
+                            <ul class="nav navbar-nav">
+                                <li><a class="active" href="#">Chưa trả tiền <span class="badge">0</span></a></li>
+                                <li><a href="#">Chờ trả tiền <span class="badge">0</span></a></li>
+                                <li><a href="#">Đã trả tiền <span class="badge">0</span></a></li>
+                            </ul>
+
+                        </div>
+
+                    </nav>
+                    <br/>
+                    <p style="margin-top: 10px;"> * Dữ liệu tiền hàng chỉ tính từ</p>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Mã vận đơn</th>
+                                <th>Mã khách hàng</th>
+                                <th>Người nhận</th>
+                                <th>Ngày gửi bữu phẩm</th>
+                                <th>Ngày phát thành công</th>
+                                <th>Tiền thu hộ (VND)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section styles {
+
+    <style type="text/css">
+        nav.navbar-findcond {
+            background: #fff;
+        }
+
+            nav.navbar-findcond a {
+                color: #f14444;
+            }
+
+        .active {
+            color: #f14444;
+            border-style: solid;
+            border-width: 0 0 1px 0;
+            border-color: #fff;
+            border-color: #f14444;
+        }
+
+        nav.navbar-findcond ul.navbar-nav a {
+            color: #f14444;
+            border-style: solid;
+            border-width: 0 0 1px 0;
+        }
+
+            nav.navbar-findcond ul.navbar-nav a:hover,
+            nav.navbar-findcond ul.navbar-nav a:visited,
+            nav.navbar-findcond ul.navbar-nav a:focus,
+            nav.navbar-findcond ul.navbar-nav a:active {
+                background: #fff;
+            }
+
+            nav.navbar-findcond ul.navbar-nav a:hover {
+                border-color: #f14444;
+            }
+
+        nav.navbar-findcond li.divider {
+            background: #ccc;
+        }
+
+        nav.navbar-findcond button.navbar-toggle {
+            background: #f14444;
+            /* border-radius: 2px;*/
+        }
+
+            nav.navbar-findcond button.navbar-toggle:hover {
+                background: #999;
+            }
+
+            nav.navbar-findcond button.navbar-toggle > span.icon-bar {
+                background: #fff;
+            }
+
+        nav.navbar-findcond ul.dropdown-menu {
+            border: 0;
+            background: #fff;
+            margin: 4px 0;
+            box-shadow: 0 0 4px 0 #ccc;
+        }
+
+            nav.navbar-findcond ul.dropdown-menu > li > a {
+                color: #444;
+            }
+
+                nav.navbar-findcond ul.dropdown-menu > li > a:hover {
+                    background: #f14444;
+                    color: #fff;
+                }
+
+        nav.navbar-findcond span.badge {
+            background: #f14444;
+            font-weight: normal;
+            font-size: 11px;
+            margin: 0 4px;
+        }
+
+            nav.navbar-findcond span.badge.new {
+                background: rgba(255, 0, 0, 0.8);
+                color: #fff;
+            }
+    </style>
+}

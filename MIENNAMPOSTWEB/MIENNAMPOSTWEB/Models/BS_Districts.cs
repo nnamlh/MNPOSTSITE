@@ -19,5 +19,6 @@ namespace MIENNAMPOSTWEB.Models
         public string ProvinceID { get; set; }
         public string DistrictValue { get; set; }
         public string DistrictCode { get; set; }
+        public Nullable<bool> VSVS { get; set; }
     }
 }

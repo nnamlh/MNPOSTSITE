@@ -4054,3 +4054,178 @@ h4.card-title a.collapsed:before {
  .box-secondary {
    background-color: #0F2765;
  }
+
+
+
+.search-price-form {
+    color: #fff;
+}
+
+    .search-price-form .form-control {
+        color: #000;
+        font-size: 1.5em;
+        min-height: 45px;
+        font-family: 'Noto Serif', serif;
+    }
+
+
+.margin {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.themeBtn {
+    background: #ff5c00;
+    color: #ffffff !important;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 500;
+    height: 50px;
+    line-height: 0.8;
+    padding: 18px 30px;
+    text-transform: capitalize;
+    border-radius: 1px;
+    letter-spacing: 0.5px;
+    border: 0px !important;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.themeBtn:hover {
+    background: rgb(255, 92, 0);
+    color: #ffffff;
+}
+
+.themeBtn2 {
+    background: #7600ff;
+    color: #ffffff !important;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 500;
+    height: 50px;
+    line-height: 0.8;
+    padding: 18px 30px;
+    text-transform: capitalize;
+    border-radius: 1px;
+    letter-spacing: 0.5px;
+    border: 0px !important;
+    cursor: pointer;
+}
+
+    .themeBtn2:hover {
+        background: rgb(118, 0, 255);
+        color: #ffffff;
+    }
+
+.themeBtn3 {
+    background: #ff2e4d;
+    color: #ffffff !important;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 500;
+    height: 50px;
+    line-height: 0.8;
+    padding: 18px 30px;
+    text-transform: capitalize;
+    border-radius: 1px;
+    letter-spacing: 0.5px;
+    border: 0px !important;
+    cursor: pointer;
+}
+
+    .themeBtn3:hover {
+        background: rgb(255, 46, 77);
+        color: #ffffff;
+    }
+
+.themeBtn4 {
+    background: #006eff;
+    color: #ffffff !important;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 500;
+    height: 50px;
+    line-height: 0.8;
+    padding: 18px 30px;
+    text-transform: capitalize;
+    border-radius: 1px;
+    letter-spacing: 0.5px;
+    border: 0px !important;
+    cursor: pointer;
+}
+
+    .themeBtn4:hover {
+        background: rgb(0, 110, 255);
+        color: #ffffff;
+    }
+
+.ripple-effect {
+    position: relative;
+    overflow: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+.ink {
+    display: block;
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+    background: #fff;
+    opacity: 0.5;
+}
+
+    .ink.animate {
+        -webkit-animation: ripple .5s linear;
+        -moz-animation: ripple .5s linear;
+        -ms-animation: ripple .5s linear;
+        -o-animation: ripple .5s linear;
+        animation: ripple .5s linear;
+    }
+
+@keyframes ripple {
+    100% {
+        opacity: 0;
+        transform: scale(2.5);
+    }
+}
+
+@-webkit-keyframes ripple {
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(2.5);
+        transform: scale(2.5);
+    }
+}
+
+@-moz-keyframes ripple {
+    100% {
+        opacity: 0;
+        -moz-transform: scale(2.5);
+        transform: scale(2.5);
+    }
+}
+
+@-ms-keyframes ripple {
+    100% {
+        opacity: 0;
+        -ms-transform: scale(2.5);
+        transform: scale(2.5);
+    }
+}
+
+@-o-keyframes ripple {
+    100% {
+        opacity: 0;
+        -o-transform: scale(2.5);
+        transform: scale(2.5);
+    }
+}

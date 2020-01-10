@@ -143,7 +143,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2019 15:38:36</publishTime>
     </File>
     <File Include="bin/MIENNAMPOSTWEB.dll">
-      <publishTime>07/12/2019 14:10:51</publishTime>
+      <publishTime>08/08/2019 18:39:33</publishTime>
     </File>
     <File Include="bin/MimeKit.dll">
       <publishTime>05/03/2019 15:38:37</publishTime>
@@ -239,7 +239,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2019 15:38:36</publishTime>
     </File>
     <File Include="bin/stdole.dll">
-      <publishTime>05/03/2019 15:38:34</publishTime>
+      <publishTime>07/16/2019 23:23:32</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>05/03/2019 15:38:36</publishTime>
@@ -1904,7 +1904,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2019 15:38:34</publishTime>
     </File>
     <File Include="Scripts/home.js">
-      <publishTime>05/03/2019 15:38:34</publishTime>
+      <publishTime>08/08/2019 18:20:41</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
       <publishTime>05/03/2019 15:38:34</publishTime>
@@ -1961,7 +1961,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2019 15:38:34</publishTime>
     </File>
     <File Include="Scripts/showcod.js">
-      <publishTime>07/12/2019 12:19:31</publishTime>
+      <publishTime>07/15/2019 16:05:11</publishTime>
     </File>
     <File Include="Scripts/showdebit.js">
       <publishTime>05/03/2019 15:38:45</publishTime>
@@ -2023,6 +2023,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/BaiViet/GioiThieu.cshtml">
       <publishTime>05/03/2019 15:38:34</publishTime>
     </File>
+    <File Include="Views/BaiViet/Xem.cshtml">
+      <publishTime>08/08/2019 18:38:56</publishTime>
+    </File>
     <File Include="Views/DichVu/Xem.cshtml">
       <publishTime>05/03/2019 15:38:34</publishTime>
     </File>
@@ -2030,10 +2033,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2019 15:38:45</publishTime>
     </File>
     <File Include="Views/DonHang/CoD.cshtml">
-      <publishTime>07/12/2019 12:16:52</publishTime>
+      <publishTime>07/15/2019 16:11:29</publishTime>
     </File>
     <File Include="Views/DonHang/Create.cshtml">
-      <publishTime>05/03/2019 15:38:34</publishTime>
+      <publishTime>08/08/2019 17:43:00</publishTime>
     </File>
     <File Include="Views/DonHang/Debit.cshtml">
       <publishTime>05/03/2019 15:38:45</publishTime>
@@ -2054,7 +2057,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2019 15:38:34</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>05/03/2019 15:38:34</publishTime>
+      <publishTime>08/08/2019 18:22:22</publishTime>
     </File>
     <File Include="Views/Manage/AddPhoneNumber.cshtml">
       <publishTime>05/03/2019 15:38:34</publishTime>
@@ -2093,7 +2096,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/03/2019 15:38:34</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/03/2019 15:38:34</publishTime>
+      <publishTime>08/08/2019 16:43:41</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutAdmin.cshtml">
       <publishTime>05/03/2019 15:38:34</publishTime>

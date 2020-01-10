@@ -50,7 +50,17 @@ namespace MIENNAMPOSTWEB.Models
         public Object data { get; set; }
 
     }
+    public class CommonData
+    {
+        public string code { get; set; }
 
+        public string name { get; set; }
+    }
+
+    public class AddressCommom : CommonData
+    {
+        public bool? vsvx { get; set; }
+    }
 
     public class MailerIdentity
     {
@@ -99,4 +109,5 @@ namespace MIENNAMPOSTWEB.Models
         public int? CurrentStatusID { get; set; }
 
     }
+
 }

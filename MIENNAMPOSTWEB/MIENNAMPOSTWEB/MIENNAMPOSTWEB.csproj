@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -989,6 +990,8 @@
     <Content Include="Template\mailer.template.xlsx" />
     <Content Include="Views\DonHang\CoD.cshtml" />
     <Content Include="Views\DonHang\Debit.cshtml" />
+    <Content Include="Views\BaiViet\Xem.cshtml" />
+    <Content Include="Views\DonHang\ManageCoD.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1030,7 +1033,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50029</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50029/</IISUrl>
+          <IISUrl>http://localhost:50030/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

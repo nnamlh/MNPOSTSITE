@@ -1,0 +1,116 @@
+﻿@model MIENNAMPOSTWEB.Models.Article
+@{
+    ViewBag.Titile = "Tin tức vận chuyển";
+}
+<div id="banner-area" class="banner-area" style="background-image:url(/Content/images/banner/banner.png)">
+    <!-- Subpage title start -->
+    <div class="banner-text text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="banner-heading">
+                        <h1 class="banner-title">TIN TỨC</h1>
+                        <h2 class="banner-desc">Bưu Chính Miền Nam</h2>
+                    </div>
+                    <ul class="breadcrumb">
+                        <li>Trang chủ</li>
+                        <li><a href="/baiviet/tintuc">Tin tức</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div><!-- Subpage title end -->
+</div><!-- Banner area end -->
+
+<section id="main-container" class="main-container">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-8 col-md-12">
+                <div class="post">
+                    <div class="post-media post-image">
+                        <img src="images/news/news-big1.jpg" class="img-fluid" alt="">
+                    </div>
+                    <div class="post-body border-box">
+                        <div class="entry-header">
+                            <div class="post-date">
+                                @Model.CreateDate.Value.ToString("dd - MM - yyyy")
+                            </div>
+                            <h2 class="entry-title">
+                                <a href="#">@Model.Title</a>
+                            </h2>
+                        </div><!-- header end -->
+
+                        <div class="entry-content">
+                            @Html.Raw(Model.Content)
+                        </div>
+
+                        <div class="tags-area clearfix">
+                            <div class="post-tags pull-left">
+                                <span>Tags:</span>
+                                <a href="#">Law</a>,
+                                <a href="#">Lawyer</a>,
+                                <a href="#">Attorney</a>,
+                                <a href="#">Family Law</a>
+                            </div>
+                            <div class="share-items pull-right">
+                                <ul class="post-social-icons unstyled">
+                                    <li class="social-icons-head">Share:</li>
+                                    <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+                                    <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+                                    <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
+                                    <li><a href="#"><i class="ion-social-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div><!-- post-body end -->
+                </div><!-- post end ******-->
+
+                <div class="author-box border-box">
+                    <div class="author-img pull-left">
+                        <img src="images/news/avator1.jpg" alt="">
+                    </div>
+                    <div class="author-info">
+                        <h3 class="author-name">BƯU CHÍNH MIÊN NAM</h3>
+                        <p>Lisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad vene minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo conse into quat. Duis aute irure dolor in reprehenderit.</p>
+                        <div class="author-social">
+                            <a href="#"><i class="ion-social-facebook"></i></a>
+                            <a href="#"><i class="ion-social-twitter"></i></a>
+                            <a href="#"><i class="ion-social-googleplus"></i></a>
+                        </div>
+                    </div>
+                </div> <!-- Author box end -->
+              
+            </div><!--/ Post Content col 9 end -->
+
+            <div class="col-lg-4 col-md-12">
+                <div class="sidebar sidebar-right">
+
+
+                    <div class="widget recent-posts">
+                        <h3 class="widget-title">Recent Posts</h3>
+                        <ul class="unstyled clearfix">
+                           
+                        </ul>
+
+                    </div><!-- Search end -->
+
+                    <div class="widget widget-tags">
+                        <h3 class="widget-title">Tags </h3>
+                        <ul class="unstyled clearfix">
+                            <li><a href="#">Family Law</a></li>
+                            <li><a href="#">Legal</a></li>
+                            <li><a href="#">Attorney</a></li>
+                            <li><a href="#">Sexual Offence</a></li>
+                            <li><a href="#">Legal Advice</a></li>
+                        </ul>
+                    </div><!-- Navigation end -->
+
+                </div><!-- Sidebar end -->
+            </div><!--/ Content col 4 end -->
+
+        </div><!-- Main Row end -->
+
+</section><!-- Main container end -->

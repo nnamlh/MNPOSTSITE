@@ -25,5 +25,20 @@ namespace MIENNAMPOSTWEB.Controllers
                 return View(data);
             }
         }
+
+        public ActionResult Xem(string id)
+        {
+            var data = db.Articles.Where(p => p.Code == id).FirstOrDefault();
+
+
+            if (data == null)
+            {
+                return Redirect("/error");
+            }
+            else
+            {
+                return View(data);
+            }
+        }
     }
 }

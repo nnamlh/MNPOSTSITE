@@ -9,6 +9,7 @@
     <Property Name="ProvinceID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="DistrictValue" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="DistrictCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="VSVS" Type="Boolean" />
   </EntityType>
   <EntityType Name="BS_Provinces">
     <Key>
@@ -28,6 +29,7 @@
     <Property Name="ServiceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsPercent" Type="Boolean" />
   </EntityType>
   <EntityType Name="BS_ServiceTypes">
     <Key>
@@ -73,6 +75,16 @@
       <Parameter Name="Ngay" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="BS_Customers" EntityType="MNPOSTModel.BS_Customers" />
+    <FunctionImport Name="CalPriceCOD" ReturnType="Collection(Decimal)">
+      <Parameter Name="Weight" Mode="In" Type="Double" />
+      <Parameter Name="CustomerID" Mode="In" Type="String" />
+      <Parameter Name="ProvinceID" Mode="In" Type="String" />
+      <Parameter Name="ServiceTypeID" Mode="In" Type="String" />
+      <Parameter Name="PostOfficeID" Mode="In" Type="String" />
+      <Parameter Name="Ngay" Mode="In" Type="String" />
+      <Parameter Name="District" Mode="In" Type="Int32" />
+      <Parameter Name="GroupTypeID" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="BS_Customers">
     <Key>

@@ -18,5 +18,6 @@ namespace MIENNAMPOSTWEB.Models
         public string ServiceName { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<bool> IsPercent { get; set; }
     }
 }

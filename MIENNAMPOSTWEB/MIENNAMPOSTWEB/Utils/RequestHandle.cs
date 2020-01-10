@@ -170,7 +170,7 @@ namespace MIENNAMPOSTWEB.Utils
 
     public class APISource
     {
-        public static string ROOTURL = "http://noiboapi.miennampost.vn/";
-        //public static string ROOTURL = "http://221.133.7.92:801/";
+        //public static string ROOTURL = "http://noiboapi.miennampost.vn/";
+        public static string ROOTURL = "http://localhost:1519/";
     }
 }

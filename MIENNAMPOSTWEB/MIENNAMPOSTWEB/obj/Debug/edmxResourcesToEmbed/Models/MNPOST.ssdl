@@ -31,6 +31,7 @@
     <Property Name="ProvinceID" Type="varchar" MaxLength="128" Nullable="false" />
     <Property Name="DistrictValue" Type="nvarchar" MaxLength="128" />
     <Property Name="DistrictCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="VSVS" Type="bit" />
   </EntityType>
   <EntityType Name="BS_Provinces">
     <Key>
@@ -50,6 +51,7 @@
     <Property Name="ServiceName" Type="nvarchar" MaxLength="50" />
     <Property Name="Price" Type="money" />
     <Property Name="IsActive" Type="bit" />
+    <Property Name="IsPercent" Type="bit" />
   </EntityType>
   <EntityType Name="BS_ServiceTypes">
     <Key>
@@ -86,6 +88,16 @@
     <Parameter Name="ServiceTypeID" Type="nvarchar" Mode="In" />
     <Parameter Name="PostOfficeID" Type="nvarchar" Mode="In" />
     <Parameter Name="Ngay" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="CalPriceCOD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Weight" Type="float" Mode="In" />
+    <Parameter Name="CustomerID" Type="nvarchar" Mode="In" />
+    <Parameter Name="ProvinceID" Type="nvarchar" Mode="In" />
+    <Parameter Name="ServiceTypeID" Type="nvarchar" Mode="In" />
+    <Parameter Name="PostOfficeID" Type="nvarchar" Mode="In" />
+    <Parameter Name="Ngay" Type="nvarchar" Mode="In" />
+    <Parameter Name="District" Type="int" Mode="In" />
+    <Parameter Name="GroupTypeID" Type="nvarchar" Mode="In" />
   </Function>
   <EntityContainer Name="MNPOSTModelStoreContainer">
     <EntitySet Name="BS_Customers" EntityType="Self.BS_Customers" Schema="dbo" store:Type="Tables" />

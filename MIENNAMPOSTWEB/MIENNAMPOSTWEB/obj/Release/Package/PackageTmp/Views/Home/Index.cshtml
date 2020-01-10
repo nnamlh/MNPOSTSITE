@@ -69,39 +69,157 @@
         </div><!--/ Container end -->
     </section><!--/ Featured end -->
 
-
-    <section id="about-us" class="about-us">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col">
-                    <h3 class="title-head">Bưu Chính Miền Nam</h3>
-                    <p class="title-description">
-                        Dịch vụ chuyển phát hàng hóa, tài liệu trong và ngoài nước. Chúng tôi cũng cấp cho quý khách 1 dịch vụ vận chuyển đáng tin cậy, an toàn và nhanh chóng
-                    </p>
-                </div>
-            </div><!--/ Title row end -->
-
+    <section id="image-block" class="image-block no-padding">
+        <div class="container-fluid">
             <div class="row">
-                <div class="featured-tab clearfix">
-                    <ul class="nav nav-tabs flex-column col-lg-3 col-md-6 float-left" role="tablist">
-                        <li class="nav-item" ng-repeat="item in dichvues">
-                            <a class="nav-link animated fadeIn" ng-class="{'active': item.isActive === true}" href="#{{item.tabid}}" data-toggle="tab">
-                                <div class="tab-info"><h3>{{item.title}}</h3></div>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content col-lg-9 col-md-6 float-right">
-                        <div class="tab-pane animated fadeInRight" ng-class="{'active': item.isActive === true}" id="{{item.tabid}}" ng-repeat="item in dichvues">
-                            <div class="tab-wrapper">
-                                <p>{{item.content}}</p>
+                <div class="col-lg-8 col-md-12 ts-padding img-block-left">
+                    <h3 class="title-classic">DỊCH VỤ CÔNG TY BƯU CHÍNH MIỀN NAM</h3>
+                    <p> Dịch vụ chuyển phát hàng hóa, tài liệu trong và ngoài nước. Chúng tôi cũng cấp cho quý khách 1 dịch vụ vận chuyển đáng tin cậy, an toàn và nhanh chóng</p>
+                    <div class="gap-20"></div>
+
+                    <div class="row">
+                        <div class="col-md-4 col-12">
+                            <div class="feature">
+                                <span class="feature-icon">
+                                    <i class="ion-ios-world-outline"></i>
+                                </span>
+                                <h3 class="feature-title">Phát hàng thu tiền (COD)</h3>
+                                <p class="feature-desc">
+                                    Phát hàng thu tiền (COD) giúp việc kinh doanh thương mại điện tử của khách hàng thuận tiện hơn
+                                </p>
                             </div>
                         </div>
-                    </div><!-- Featured tab end -->
-                </div> <!-- COl End -->
-            </div><!--/ Content row end -->
-        </div><!--/ Container end -->
-    </section><!-- About us end -->
+                        <!--/ End 1st -->
+                        <div class="col-md-4 col-12">
+                            <div class="feature">
+                                <span class="feature-icon">
+                                    <i class="ion-ios-people-outline"></i>
+                                </span>
+                                <h3 class="feature-title">Chuyển phát tiết kiệm</h3>
+                                <p class="feature-desc">
+                                    Chuyển phát tiết kiệm (CPTK) sẽ mang đến mức chi phí hợp lý nhất cho người gửi
+                                </p>
+                            </div>
+                        </div>
 
+                        <div class="col-md-4 col-xs-12">
+                            <div class="feature">
+                                <span class="feature-icon">
+                                    <i class="ion-ios-lightbulb-outline"></i>
+                                </span>
+                                <h3 class="feature-title">Dịch vụ gia tăng</h3>
+                                <p class="feature-desc">
+                                    DVGT đáp ứng thêm mọi nhu cầu của quý khách.
+                                </p>
+                            </div>
+                        </div>
+                        <!--/ End 2nd -->
+                    </div>
+                    <!--1st Row end -->
+
+                    <div class="gap-20"></div>
+
+                    <div class="row">
+
+                        <!--/ End 3rd -->
+                        <div class="col-md-4 col-xs-12">
+                            <div class="feature">
+                                <span class="feature-icon">
+                                    <i class="ion-ios-analytics-outline"></i>
+                                </span>
+                                <h3 class="feature-title">Chuyển phát nhanh</h3>
+                                <p class="feature-desc">
+                                    Với dịch vụ chuyển phát nhanh (CPN), bưu phẩm sẽ đến tay người nhận trong thời gian nhanh nhất
+                                </p>
+                            </div>
+                        </div>
+                        <!--/ End 4th -->
+                        <div class="col-md-4 col-xs-12">
+                            <div class="feature">
+                                <span class="feature-icon">
+                                    <i class="ion-ios-analytics-outline"></i>
+                                </span>
+                                <h3 class="feature-title">Chuyển phát quốc tế</h3>
+                                <p class="feature-desc">
+                                    Xoá tan mọi khoảng cách về địa lý giữa các doanh nghiệp trong nước và quốc tế với hơn 200 quốc gia trên thế giới
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--1st Row end -->
+
+
+                </div><!-- Col end -->
+                <div class="col-lg-4 col-md-12 ts-padding features-row search-price-form">
+                    <form ng-submit="calPrice()">
+                        <div class="row ">
+                            <div class="col-sm-12">
+                                <label><strong>Nơi gửi</strong></label>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select class="form-control" ng-model="mailer.SenderProvinceID" ng-change="provinceChange('district', 'send')" required>
+                                    <option ng-repeat="item in provinceSend" value="{{item.code}}">{{item.name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select class="form-control" ng-model="mailer.SenderDistrictID" required>
+                                    <option ng-repeat="item in districtSend" value="{{item.code}}">{{item.name}}</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+                        <div class="gap-20"></div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label><strong>Nơi Nhận</strong></label>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select class="form-control" ng-model="mailer.RecieverProvinceID" ng-change="provinceChange('district', 'recei')" required>
+                                    <option ng-repeat="item in provinceSend" value="{{item.code}}">{{item.name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select class="form-control" ng-model="mailer.RecieverDistrictID" required>
+                                    <option ng-repeat="item in districtRecei" value="{{item.code}}">{{item.name}}</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+                        <div class="gap-20"></div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label><strong>Dịch vụ</strong></label>
+                                <select class="form-control" ng-model="mailer.MailerTypeID">
+                                    <option ng-repeat="item in mailerTypes" value="{{item.code}}">{{item.name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label><strong>Tiền thu hộ</strong></label>
+                                <input type="text" class="form-control" ng-model="mailer.COD" />
+                            </div>
+                        </div>
+                        <div class="gap-20"></div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button class="themeBtn ripple-effect" type="submit">XEM GIÁ</button>
+                            </div>
+                        </div>
+                        <div class="gap-20"></div>
+                        <div class="col-sm-12">
+                            <h3 class="widget-title">{{mailer.PriceDefault | currency: ' VND'}}</h3>
+                        </div>
+
+                    </form> <!-- Form end -->
+
+                </div><!-- Col end -->
+            </div>
+            <!--/ Content row end -->
+        </div>
+        <!--/ Container end -->
+    </section>
 
     <section id="news" class="news">
         <div class="container">
@@ -114,7 +232,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-12" ng-repeat="item in baiviets">
                     <div class="latest-post">
-                        <img class="img-fluid" src="~{{item.image}}" alt="img">
+                        <img class="img-fluid" src="{{item.image}}" alt="img">
                         <div class="post-body">
                             <h4 class="post-title">
                                 <a href="/baiviet/xem/{{item.code}}">{{item.title}}</a>
@@ -143,9 +261,55 @@
             </div><!--/ Title row end -->
             <div class="row">
                 <div class="col-md-12 ml-lg-auto">
-                    <ul class="row clients-row unstyled"></ul>
+                    <ul class="row clients-row unstyled">
+                        <li class="col-lg-4 col-md-4 col-6">
+                            <span class="client-logo">
+                                <a href="#"><img src="~/content/images/clients/client1.png" alt=""> </a>
+                            </span>
+                        </li>
+                        <li class="col-lg-4 col-md-4 col-6">
+                            <span class="client-logo">
+                                <a href="#"><img src="~/content/images/clients/client2.png" alt=""> </a>
+                            </span>
+                        </li>
+                        <li class="col-lg-4 col-md-4 col-6">
+                            <span class="client-logo">
+                                <a href="#"><img src="~/content/images/clients/client3.png" alt=""> </a>
+                            </span>
+                        </li>
+                        <li class="col-lg-4 col-md-4 col-6">
+                            <span class="client-logo">
+                                <a href="#"><img src="~/content/images/clients/client4.png" alt=""> </a>
+                            </span>
+                        </li>
+                        <li class="col-lg-4 col-md-4 col-6">
+                            <span class="client-logo">
+                                <a href="#"><img src="~/content/images/clients/client5.png" alt=""> </a>
+                            </span>
+                        </li>
+                        <li class="col-lg-4 col-md-4 col-6">
+                            <span class="client-logo">
+                                <a href="#"><img src="~/content/images/clients/client6.png" alt=""> </a>
+                            </span>
+                        </li>
+                        <li class="col-lg-4 col-md-4 col-6">
+                            <span class="client-logo">
+                                <a href="#"><img src="~/content/images/clients/client7.png" alt=""> </a>
+                            </span>
+                        </li>
+                        <li class="col-lg-4 col-md-4 col-6">
+                            <span class="client-logo">
+                                <a href="#"><img src="~/content/images/clients/client8.png" alt=""> </a>
+                            </span>
+                        </li>
+                        <li class="col-lg-4 col-md-4 col-6">
+                            <span class="client-logo">
+                                <a href="#"><img src="~/content/images/clients/client9.png" alt=""> </a>
+                            </span>
+                        </li>
+                    </ul>
 
-                </div><!-- Client logo end -->
+                </div>
             </div><!--/ Content row end -->
         </div><!--/ Container end -->
     </section><!--/ Clients end -->
@@ -153,5 +317,14 @@
 </div>
 
 @section scripts {
+    <script>
+        // tao controller
+
+       var mailerTypesGet = angular.fromJson(@Html.Raw(Json.Encode(ViewBag.MailerTypes)));
+
+        var provinceSendGet = angular.fromJson(@Html.Raw(Json.Encode(ViewBag.Provinces)));
+
+
+    </script>
     <script src="~/Scripts/home.js"></script>
 }

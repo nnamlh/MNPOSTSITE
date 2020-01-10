@@ -7,17 +7,17 @@
 <div ng-app="myApp" ng-controller="myCtrl">
     <!-- top tiles -->
     <div class="row tile_count">
-        <div class="col-sm-3 col-xs-6 tile_stats_count">
+        <div class="col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Số tiền COD</span>
-            <div class="count">{{ sumCoD | currency:'đ'}}&nbsp;đơn</div>
+            <div class="count">{{ sumCoD}}</div>
         </div>
-        <div class="col-sm-3 col-xs-6 tile_stats_count">
+        <div class="col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Số COD đang phát</span>
-            <div class="count">{{sumCODDangPhat | currency:'VND'}}</div>
+            <div class="count">{{ sumCODDangPhat}}</div>
         </div>
-        <div class="col-sm-3 col-xs-6 tile_stats_count">
+        <div class="col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Số COD chuyển hoàn</span>
-            <div class="count">{{sumCODChuyenHoan | currency:'VND'}}</div>
+            <div class="count">{{ sumCODChuyenHoan}}</div>
         </div>
     </div>
     <!-- /top tiles -->

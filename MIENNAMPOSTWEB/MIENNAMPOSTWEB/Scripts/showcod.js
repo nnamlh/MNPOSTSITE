@@ -89,7 +89,7 @@ app.controller('myCtrl', function ($scope, $http) {
         $http.get('/donhang/ReportCoD').then(function (response) {
 
             var result = angular.fromJson(response.data);
-
+            console.log(result);
             $scope.sumCODDangPhat = result.data.sumCODDangPhat;
             $scope.sumCODChuyenHoan = result.data.sumCODChuyenHoan;
             $scope.sumCoD = result.data.sumCoD;
@@ -111,5 +111,16 @@ app.controller('myCtrl', function ($scope, $http) {
         });
     };
 
+    $scope.listMailerData = [];
+
+    $scope.showMailerDetails = function (type_id) {
+        showModel('mailersModal');
+        showLoader(true);
+        $http.get("/donhang/GetMailersByStatus?type=" + type_id).then(function (response) {
+            showLoader(false);
+            var result = angular.fromJson(response.data);
+            $scope.listMailerData = angular.copy(result.data);
+        });
+    };
 
 });

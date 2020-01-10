@@ -423,6 +423,14 @@ namespace MIENNAMPOSTWEB.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult GetMailersByStatus(int? type)
+        {
+            var findUSer = db.AspNetUsers.Where(p => p.UserName == User.Identity.Name).FirstOrDefault();
+            var res = RequestHandle.SendGet(APISource.ROOTURL + "api/mailer/GetMailersByStatus?type=" + type + "&cusId=" + findUSer.IDClient, true);
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
 
         // debit
         [HttpGet]
@@ -459,6 +467,13 @@ namespace MIENNAMPOSTWEB.Controllers
             var res = RequestHandle.SendGet(APISource.ROOTURL + "api/mailer/CustomerDebitDetail?documentid=" + documentId, true);
 
             return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult ManageCoD()
+        {
+
+            return View();
         }
     }
 }

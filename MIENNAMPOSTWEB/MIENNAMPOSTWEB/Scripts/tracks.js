@@ -8,6 +8,8 @@ app.controller('myCtrl', function ($scope, $http) {
 
     $scope.tracks = [];
 
+    $scope.images = [];
+
     $scope.tracuu = function () {
         $scope.mailer = {};
 
@@ -22,6 +24,7 @@ app.controller('myCtrl', function ($scope, $http) {
             } else {
                 $scope.mailer = result.data.info;
                 $scope.tracks = result.data.tracks;
+                $scope.images = result.data.images;
             }
 
         });

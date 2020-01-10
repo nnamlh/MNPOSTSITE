@@ -4,6 +4,7 @@
     <EntitySetMapping Name="BS_Districts">
       <EntityTypeMapping TypeName="MNPOSTModel.BS_Districts">
         <MappingFragment StoreEntitySet="BS_Districts">
+          <ScalarProperty Name="VSVS" ColumnName="VSVS" />
           <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
           <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
           <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
@@ -26,6 +27,7 @@
     <EntitySetMapping Name="BS_Services">
       <EntityTypeMapping TypeName="MNPOSTModel.BS_Services">
         <MappingFragment StoreEntitySet="BS_Services">
+          <ScalarProperty Name="IsPercent" ColumnName="IsPercent" />
           <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
           <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
           <ScalarProperty Name="Price" ColumnName="Price" />
@@ -88,5 +90,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CalPriceCOD" FunctionName="MNPOSTModel.Store.CalPriceCOD" />
   </EntityContainerMapping>
 </Mapping>

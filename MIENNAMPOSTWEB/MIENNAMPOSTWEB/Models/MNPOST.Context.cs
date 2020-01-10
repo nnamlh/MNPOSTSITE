@@ -63,5 +63,42 @@ namespace MIENNAMPOSTWEB.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("CalPrice", weightParameter, customerIDParameter, provinceIDParameter, serviceTypeIDParameter, postOfficeIDParameter, ngayParameter);
         }
+    
+        public virtual ObjectResult<Nullable<decimal>> CalPriceCOD(Nullable<double> weight, string customerID, string provinceID, string serviceTypeID, string postOfficeID, string ngay, Nullable<int> district, string groupTypeID)
+        {
+            var weightParameter = weight.HasValue ?
+                new ObjectParameter("Weight", weight) :
+                new ObjectParameter("Weight", typeof(double));
+    
+            var customerIDParameter = customerID != null ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(string));
+    
+            var provinceIDParameter = provinceID != null ?
+                new ObjectParameter("ProvinceID", provinceID) :
+                new ObjectParameter("ProvinceID", typeof(string));
+    
+            var serviceTypeIDParameter = serviceTypeID != null ?
+                new ObjectParameter("ServiceTypeID", serviceTypeID) :
+                new ObjectParameter("ServiceTypeID", typeof(string));
+    
+            var postOfficeIDParameter = postOfficeID != null ?
+                new ObjectParameter("PostOfficeID", postOfficeID) :
+                new ObjectParameter("PostOfficeID", typeof(string));
+    
+            var ngayParameter = ngay != null ?
+                new ObjectParameter("Ngay", ngay) :
+                new ObjectParameter("Ngay", typeof(string));
+    
+            var districtParameter = district.HasValue ?
+                new ObjectParameter("District", district) :
+                new ObjectParameter("District", typeof(int));
+    
+            var groupTypeIDParameter = groupTypeID != null ?
+                new ObjectParameter("GroupTypeID", groupTypeID) :
+                new ObjectParameter("GroupTypeID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("CalPriceCOD", weightParameter, customerIDParameter, provinceIDParameter, serviceTypeIDParameter, postOfficeIDParameter, ngayParameter, districtParameter, groupTypeIDParameter);
+        }
     }
 }
